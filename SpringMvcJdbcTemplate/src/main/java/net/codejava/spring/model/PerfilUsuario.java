@@ -9,10 +9,9 @@ public class PerfilUsuario {
 	public PerfilUsuario() {
 	}
 
-	public PerfilUsuario(String nombre, String descripcion, int estado) {
+	public PerfilUsuario(String nombre, String descripcion) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.estado = estado;
 	}
 
 	public int getId() {
