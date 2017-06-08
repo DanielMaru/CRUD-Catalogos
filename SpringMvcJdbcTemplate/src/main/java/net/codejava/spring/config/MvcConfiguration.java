@@ -2,6 +2,8 @@ package net.codejava.spring.config;
 
 import javax.sql.DataSource;
 
+import net.codejava.spring.dao.CategoriaDAO;
+import net.codejava.spring.dao.CategoriaDAOImpl;
 import net.codejava.spring.dao.ContactDAO;
 import net.codejava.spring.dao.ContactDAOImpl;
 import net.codejava.spring.dao.PerfilUsuarioDAO;
@@ -41,7 +43,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/mydb");
 		dataSource.setUsername("root");
-		dataSource.setPassword("Admin");
+		dataSource.setPassword("");
 		
 		return dataSource;
 	}
@@ -54,5 +56,9 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	@Bean
 	public PerfilUsuarioDAO getPerfilUsuarioDAO() {
 		return new PerfilUsuarioDAOImpl(getDataSource());
+	}
+	@Bean
+	public CategoriaDAO getCategoriaDAO() {
+		return new CategoriaDAOImpl(getDataSource());
 	}
 }

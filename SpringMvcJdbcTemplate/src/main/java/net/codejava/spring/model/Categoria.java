@@ -4,12 +4,12 @@ public class Categoria {
 	private int id;
 	private String nombre;
 	private String descripcion;
-	private boolean estadoEliminado;
+	private int estadoEliminado;
 	
 	public Categoria(){
 		
 	}	
-	public Categoria(int id, String nombre, String descripcion, boolean estadoEliminado) {
+	public Categoria(int id, String nombre, String descripcion, int estadoEliminado) {
 		
 		this.id = id;
 		this.nombre = nombre;
@@ -34,10 +34,10 @@ public class Categoria {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public boolean isEstadoEliminado() {
+	public int getEstadoEliminado() {
 		return estadoEliminado;
 	}
-	public void setEstadoEliminado(boolean estadoEliminado) {
+	public void setEstadoEliminado(int estadoEliminado) {
 		this.estadoEliminado = estadoEliminado;
 	}
 	
