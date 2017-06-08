@@ -8,6 +8,8 @@ import net.codejava.spring.dao.ContactDAO;
 import net.codejava.spring.dao.ContactDAOImpl;
 import net.codejava.spring.dao.PerfilUsuarioDAO;
 import net.codejava.spring.dao.PerfilUsuarioDAOImpl;
+import net.codejava.spring.dao.UsuarioDAO;
+import net.codejava.spring.dao.UsuarioDAOImp;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -41,9 +43,9 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/mydb");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/contactdb");
 		dataSource.setUsername("root");
-		dataSource.setPassword("");
+		dataSource.setPassword("Admin");
 		
 		return dataSource;
 	}
@@ -57,6 +59,12 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	public PerfilUsuarioDAO getPerfilUsuarioDAO() {
 		return new PerfilUsuarioDAOImpl(getDataSource());
 	}
+	
+	@Bean 
+	public UsuarioDAO getUsuarioDAO(){
+		return new UsuarioDAOImp(getDataSource());
+	}
+	
 	@Bean
 	public CategoriaDAO getCategoriaDAO() {
 		return new CategoriaDAOImpl(getDataSource());
