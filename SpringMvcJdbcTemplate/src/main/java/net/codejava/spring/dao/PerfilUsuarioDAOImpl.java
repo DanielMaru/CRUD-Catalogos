@@ -27,7 +27,7 @@ public class PerfilUsuarioDAOImpl implements PerfilUsuarioDAO {
 	}
 
 	@Override
-	public void saveOrUpdate(PerfilUsuario perfilUsuario) {
+	public void guardarOActualizar(PerfilUsuario perfilUsuario) {
 		if (perfilUsuario.getId() > 0) {
 			// update
 			String sql = "UPDATE perfiles_usuarios SET nomPERFIL=?, descripPERFIL=?, "
@@ -44,13 +44,13 @@ public class PerfilUsuarioDAOImpl implements PerfilUsuarioDAO {
 	}
 
 	@Override
-	public void delete(int perfilUsuarioId) {
+	public void borrar(int perfilUsuarioId) {
 		String sql = "DELETE FROM perfiles_usuarios WHERE idPERFIL=?";
 		jdbcTemplate.update(sql, perfilUsuarioId);
 	}
 
 	@Override
-	public List<PerfilUsuario> list() {
+	public List<PerfilUsuario> listar() {
 		String sql = "SELECT * FROM perfiles_usuarios";
 		List<PerfilUsuario> listPerfilUsuario = jdbcTemplate.query(sql, new RowMapper<PerfilUsuario>() {
 
@@ -72,7 +72,7 @@ public class PerfilUsuarioDAOImpl implements PerfilUsuarioDAO {
 	}
 
 	@Override
-	public PerfilUsuario get(int perfilId) {
+	public PerfilUsuario obtener(int perfilId) {
 		String sql = "SELECT * FROM perfiles_usuarios WHERE idPERFIL=" + perfilId;
 		return jdbcTemplate.query(sql, new ResultSetExtractor<PerfilUsuario>() {
 

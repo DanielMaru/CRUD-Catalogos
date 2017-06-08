@@ -31,7 +31,7 @@ public class PerfilUsuarioControlador {
 	
 	@RequestMapping(value="/perfil")
 	public ModelAndView listPerfilUsuario(ModelAndView model) throws IOException{
-		List<PerfilUsuario> listPerfilUsuario = perfilUsuarioDAO.list();
+		List<PerfilUsuario> listPerfilUsuario = perfilUsuarioDAO.listar();
 		model.addObject("listPerfilUsuario", listPerfilUsuario);
 		model.setViewName("PerfilView"); //NOMBRE DE LA VISTA PERFIL
 		
@@ -48,21 +48,21 @@ public class PerfilUsuarioControlador {
 	
 	@RequestMapping(value = "/guardarPerfil", method = RequestMethod.POST)
 	public ModelAndView guardarPerfil(@ModelAttribute PerfilUsuario perfilUsuario) {
-		perfilUsuarioDAO.saveOrUpdate(perfilUsuario);		
+		perfilUsuarioDAO.guardarOActualizar(perfilUsuario);		
 		return new ModelAndView("redirect:/perfil");
 	}
 	
 	@RequestMapping(value = "/borrarPerfil", method = RequestMethod.GET)
 	public ModelAndView borrarPerfilUsuario(HttpServletRequest request) {
 		int perfilId = Integer.parseInt(request.getParameter("id"));
-		perfilUsuarioDAO.delete(perfilId);
+		perfilUsuarioDAO.borrar(perfilId);
 		return new ModelAndView("redirect:/perfil");
 	}
 	
 	@RequestMapping(value = "/editarPerfil", method = RequestMethod.GET)
 	public ModelAndView editarPerfilUsuario(HttpServletRequest request) {
 		int perfilId = Integer.parseInt(request.getParameter("id"));
-		PerfilUsuario perfilUsuario = perfilUsuarioDAO.get(perfilId);
+		PerfilUsuario perfilUsuario = perfilUsuarioDAO.obtener(perfilId);
 		ModelAndView model = new ModelAndView("PerfilForm");
 		model.addObject("perfilUsuario", perfilUsuario);
 		

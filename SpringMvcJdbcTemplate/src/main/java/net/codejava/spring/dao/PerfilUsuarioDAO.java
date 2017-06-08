@@ -12,11 +12,11 @@ import net.codejava.spring.model.PerfilUsuario;
  */
 public interface PerfilUsuarioDAO {
 	
-	public void saveOrUpdate(PerfilUsuario perfil);
+	public void guardarOActualizar(PerfilUsuario perfil);
 	
-	public void delete(int perfilId);
+	public void borrar(int perfilId);
 	
-	public PerfilUsuario get(int perfilId);
+	public PerfilUsuario obtener(int perfilId);
 	
-	public List<PerfilUsuario> list();
+	public List<PerfilUsuario> listar();
 }
