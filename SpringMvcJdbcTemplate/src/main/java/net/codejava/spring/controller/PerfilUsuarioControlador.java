@@ -30,41 +30,41 @@ public class PerfilUsuarioControlador {
 	private PerfilUsuarioDAO perfilUsuarioDAO;
 	
 	@RequestMapping(value="/perfil")
-	public ModelAndView listContact(ModelAndView model) throws IOException{
+	public ModelAndView listPerfilUsuario(ModelAndView model) throws IOException{
 		List<PerfilUsuario> listPerfilUsuario = perfilUsuarioDAO.list();
 		model.addObject("listPerfilUsuario", listPerfilUsuario);
-		model.setViewName("perfilView"); //NOMBRE DE LA VISTA PERFIL
+		model.setViewName("PerfilView"); //NOMBRE DE LA VISTA PERFIL
 		
 		return model;
 	}
 	
-	@RequestMapping(value = "/newPerfil", method = RequestMethod.GET)
-	public ModelAndView newPerfil(ModelAndView model) {
-		Contact newPerfil = new Contact();
-		model.addObject("perfilUsuario", newPerfil);
+	@RequestMapping(value = "/nuevoPerfil", method = RequestMethod.GET)
+	public ModelAndView nuevoPerfil(ModelAndView model) {
+		PerfilUsuario nuevoPerfil = new PerfilUsuario();
+		model.addObject("perfilUsuario", nuevoPerfil);
 		model.setViewName("PerfilForm"); //NOMBRE FORM
 		return model;
 	}
 	
-	@RequestMapping(value = "/savePerfil", method = RequestMethod.POST)
-	public ModelAndView savePerfil(@ModelAttribute PerfilUsuario perfilUsuario) {
+	@RequestMapping(value = "/guardarPerfil", method = RequestMethod.POST)
+	public ModelAndView guardarPerfil(@ModelAttribute PerfilUsuario perfilUsuario) {
 		perfilUsuarioDAO.saveOrUpdate(perfilUsuario);		
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/perfil");
 	}
 	
-	@RequestMapping(value = "/deletePerfil", method = RequestMethod.GET)
-	public ModelAndView deleteContact(HttpServletRequest request) {
+	@RequestMapping(value = "/borrarPerfil", method = RequestMethod.GET)
+	public ModelAndView borrarPerfilUsuario(HttpServletRequest request) {
 		int perfilId = Integer.parseInt(request.getParameter("id"));
 		perfilUsuarioDAO.delete(perfilId);
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/perfil");
 	}
 	
-	@RequestMapping(value = "/editPerfil", method = RequestMethod.GET)
-	public ModelAndView editContact(HttpServletRequest request) {
+	@RequestMapping(value = "/editarPerfil", method = RequestMethod.GET)
+	public ModelAndView editarPerfilUsuario(HttpServletRequest request) {
 		int perfilId = Integer.parseInt(request.getParameter("id"));
 		PerfilUsuario perfilUsuario = perfilUsuarioDAO.get(perfilId);
-		ModelAndView model = new ModelAndView("ContactForm");
-		model.addObject("contact", perfilUsuario);
+		ModelAndView model = new ModelAndView("PerfilForm");
+		model.addObject("perfilUsuario", perfilUsuario);
 		
 		return model;
 	}

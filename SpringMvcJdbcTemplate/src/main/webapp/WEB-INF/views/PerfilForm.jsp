@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div align="center">
-		<h1>New/Edit Contact</h1>
+		<h1>Nuevo/Editar Perfil</h1>
 		<form:form action="guardarPerfil" method="post" modelAttribute="perfilUsuario">
 		<table>
 			<form:hidden path="id"/>

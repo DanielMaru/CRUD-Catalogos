@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import net.codejava.spring.model.Contact;
 import net.codejava.spring.model.PerfilUsuario;
 
 import org.springframework.dao.DataAccessException;
@@ -15,7 +14,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 /**
- * An implementation of the ContactDAO interface.
+ * An implementation of the PerfilDAO interface.
  * @author www.codejava.net
  *
  */
