@@ -11,25 +11,27 @@
     </head>
     <body>
     	<div align="center">
-	        <h1>Contact List</h1>
-	        <h3><a href="newCategoria">Nuevo contacto</a></h3>
+	        <h1>Categorias</h1>
+	        <h3><a href="nuevaCategoria">Nueva categoria</a></h3>
 	        <table "table table-condensed" >
 	        	<th>ID</th>
 	        	<th>Nombre</th>
 	        	<th>Descripcion</th>
+	        	<th>Accion</th>
 	        	
 	        	
-				<c:forEach var="contact" items="${listCategoria}" varStatus="status">
+	        	
+				<c:forEach var="categoria" items="${listCategoria}" varStatus="status">
 	        	<tr>
 	        		
-					<td>${Categoria.id}</td>
-					<td>${Categoria.nombre}</td>
-					<td>${Categoria.descripcion}</td>
+					<td>${categoria.id}</td>
+					<td>${categoria.nombre}</td>
+					<td>${categoria.descripcion}</td>
 					
 					<td>
-						<a href="editCategoria?id=${Categoria.id}">Edit</a>
+						<a href="editarCategoria?id=${categoria.id}">Edit</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="deleteCategoria?id=${Categoria.id}">Delete</a>
+						<a href="eliminarCategoria?id=${categoria.id}">Delete</a>
 					</td>
 							
 	        	</tr>

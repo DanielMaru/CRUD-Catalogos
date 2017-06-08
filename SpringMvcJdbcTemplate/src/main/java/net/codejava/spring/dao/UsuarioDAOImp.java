@@ -27,15 +27,15 @@ public class UsuarioDAOImp implements UsuarioDAO{
 		if (usuario.getId()>0) {
 			// update
 			String sql = "UPDATE usuarios SET id=?, nombre=?, pass=?, "
-						+ "estado=?, login=? WHERE id=?";
+						+ "estado=? WHERE id=?";
 			jdbcTemplate.update(sql, usuario.getId(), usuario.getNombre(),
-					usuario.getPass(), usuario.getEstado(),usuario.getLogin(),usuario.getId());
+					usuario.getPass(), usuario.getEstado(),usuario.getId());
 		} else {
 			// insert
-			String sql = "INSERT INTO usuarios ( nombre, pass, estado,login)"
-						+ " VALUES ( ?, ?, ?,?)";
-			jdbcTemplate.update(sql, usuario.getNombre(),
-					usuario.getPass(), usuario.getEstado(),usuario.getLogin());
+			String sql = "INSERT INTO usuarios (id, nombre, pass, estado)"
+						+ " VALUES (?, ?, ?, ?)";
+			jdbcTemplate.update(sql, usuario.getId(), usuario.getNombre(),
+					usuario.getPass(), usuario.getEstado());
 		}
 		
 	}
@@ -64,7 +64,6 @@ public class UsuarioDAOImp implements UsuarioDAO{
 					usuario.setNombre(rs.getString("nombre"));
 					usuario.setPass(rs.getString("pass"));
 					usuario.setEstado(rs.getInt("estado"));
-					usuario.setLogin(rs.getString("login"));
 					return usuario;
 				}
 				
@@ -87,7 +86,6 @@ public class UsuarioDAOImp implements UsuarioDAO{
 				myUsuario.setId(rs.getInt("id"));
 				myUsuario.setNombre(rs.getString("nombre"));
 				myUsuario.setPass(rs.getString("pass"));
-				myUsuario.setLogin(rs.getString("login"));
 				myUsuario.setEstado(rs.getInt("estado"));
 				
 				return myUsuario;

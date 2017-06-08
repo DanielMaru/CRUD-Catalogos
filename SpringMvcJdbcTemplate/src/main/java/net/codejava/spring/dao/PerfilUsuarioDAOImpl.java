@@ -27,27 +27,16 @@ public class PerfilUsuarioDAOImpl implements PerfilUsuarioDAO {
 	}
 
 	@Override
-	public boolean guardarOActualizar(PerfilUsuario perfilUsuario){
+	public void guardarOActualizar(PerfilUsuario perfilUsuario) {
 		if (perfilUsuario.getId() > 0) {
 			// update
 			String sql = "UPDATE perfiles_usuarios SET nomPERFIL=?, descripPERFIL=? WHERE idPERFIL=?";
-			try{
 			jdbcTemplate.update(sql, perfilUsuario.getNombre(), perfilUsuario.getDescripcion(), perfilUsuario.getId());
-			}catch(DataAccessException exception){
-				return false;
-			}
-			return true;
-			
 		} else {
 			// insert
 			String sql = "INSERT INTO perfiles_usuarios (nomPERFIL, descripPERFIL)"
 						+ " VALUES (?, ?)";
-			try{
 			jdbcTemplate.update(sql, perfilUsuario.getNombre(), perfilUsuario.getDescripcion());
-			}catch(DataAccessException exception){
-				return false;
-			}
-			return true;
 		}
 		
 	}

@@ -32,14 +32,15 @@
   			}
 		}
 	</script>
-    	<div align="center">
-    	<h1>Buscar Perfil</h1>
+    	<div class="row" align="center">
+    	<h3>Buscar Perfil</h3>
 		<input type="text" id="id" onkeyup="myFunction()" placeholder="Buscando...">
     	</div>
     	<div align="center">
 	        <h1>Lista de Perfiles</h1>
-	        <h3><a href="nuevoPerfil">Nuevo Perfil</a></h3>
-	        <table border="1" id="tablaPerfiles">
+	        <h3><a href="nuevoPerfil" class="btn btn-primary ">Nuevo Perfil</a></h3>
+	        <div class="col-md-6 col-md-offset-3" border="3">
+	            <table  class="table table-bordered table-striped " id="tablaPerfiles">
 	        	<th>Nombre</th>
 	        	<th>Descripcion</th>
 	        	<th>Acción</th>
@@ -57,6 +58,8 @@
 	        	</tr>
 				</c:forEach>	        	
 			</table>
+	        </div>
+	      
     	</div>
     </body>
 </html>

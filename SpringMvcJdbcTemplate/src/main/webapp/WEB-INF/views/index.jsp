@@ -21,10 +21,10 @@
 			   <a href="perfil" class="btn btn-primary btn-lg btn-block" role="button">Perfiles </a>
 			</div>
 			<div class="col-md-6 col-md-offset-3">
-			   <a href="perfil" class="btn btn-info btn-lg btn-block" role="button">Categorias </a>
+			   <a href="categorias" class="btn btn-info btn-lg btn-block" role="button">Categorias </a>
 			</div>
 			<div class="col-md-6 col-md-offset-3">
-			   <a href="perfil" class="btn btn-primary btn-lg btn-block" role="button">Usuarios </a>
+			   <a href="usuarios" class="btn btn-primary btn-lg btn-block" role="button">Usuarios </a>
 			</div>
 			<div class="col-md-6 col-md-offset-3">
 			   <a href="perfil" class="btn btn-info btn-lg btn-block" role="button">Departamentos </a>

@@ -24,12 +24,12 @@ public class CategoriaDAOImpl implements CategoriaDAO{
 	public void guardarOActualizar(Categoria categoria) {
 		if(categoria.getId() > 0){
 			//Actualizar
-			String sql = "UPDATE categoria SET nomCATEGORIAS=?, descipCATEGORIAS=?  WHERE idCATEGORIAS=?";
+			String sql = "UPDATE categorias SET nomCATEGORIAS=?, descripCATEGORIAS=?  WHERE idCATEGORIAS=?";
 			jdbcTemplate.update(sql, categoria.getNombre(), categoria.getDescripcion(), categoria.getId());
 		}
 		else{
 			//Insertar
-			String sql = "INSERT INTO categoria (nomCATEGORIAS, descipCATEGORIAS, estadoCATEGORIA)"
+			String sql = "INSERT INTO categorias (nomCATEGORIAS, descripCATEGORIAS, estadoCATEGORIA)"
 					+ " VALUES (?, ?, ?)";
 			jdbcTemplate.update(sql, categoria.getNombre(), categoria.getDescripcion(),
 					categoria.getEstadoEliminado());
@@ -39,7 +39,7 @@ public class CategoriaDAOImpl implements CategoriaDAO{
 
 	@Override
 	public void eliminar(int categoriaId) {
-		String sql = "UPDATE categoria SET estadoCATEGORIA=1 WHERE idCATEGORIAS=?";
+		String sql = "UPDATE categorias SET estadoCATEGORIA=1 WHERE idCATEGORIAS=?";
 		jdbcTemplate.update(sql, categoriaId);
 		
 	}
@@ -71,7 +71,7 @@ public class CategoriaDAOImpl implements CategoriaDAO{
 	@Override
 	public List<Categoria> list() {
 	
-		String sql = "SELECT * FROM categorias";
+		String sql = "SELECT * FROM categorias WHERE estadoCATEGORIA='0'";
 		List<Categoria> listCategoria = jdbcTemplate.query(sql, new RowMapper<Categoria>() {
 
 			@Override

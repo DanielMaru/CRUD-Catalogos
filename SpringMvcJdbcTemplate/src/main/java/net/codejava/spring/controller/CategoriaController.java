@@ -25,7 +25,7 @@ public class CategoriaController {
 	public ModelAndView listCategoria(ModelAndView model) throws IOException{
 		List<Categoria> listCategoria = categoriaDAO.list();
 		model.addObject("listCategoria", listCategoria);
-		model.setViewName("homeCategorias");
+		model.setViewName("categoriaHome");
 		
 		return model;
 	}
@@ -34,28 +34,28 @@ public class CategoriaController {
 	public ModelAndView nuevaCategoria(ModelAndView model) {
 		Categoria nuevaCategoria = new Categoria();
 		model.addObject("categoria", nuevaCategoria);
-		model.setViewName("CategoriaForm");
+		model.setViewName("categoriaForm");
 		return model;
 	}
 	
 	@RequestMapping(value = "/guardarCategoria", method = RequestMethod.POST)
 	public ModelAndView guardarCategoria(@ModelAttribute Categoria categoria) {
 		categoriaDAO.guardarOActualizar(categoria);		
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/categorias");
 	}
 	
 	@RequestMapping(value = "/eliminarCategoria", method = RequestMethod.GET)
 	public ModelAndView eliminarCategoria(HttpServletRequest request) {
 		int categoriaId = Integer.parseInt(request.getParameter("id"));
 		categoriaDAO.eliminar(categoriaId);
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/categorias");
 	}
 	
 	@RequestMapping(value = "/editarCategoria", method = RequestMethod.GET)
 	public ModelAndView editarCategoria(HttpServletRequest request) {
 		int categoriaId = Integer.parseInt(request.getParameter("id"));
 		Categoria categoria = categoriaDAO.get(categoriaId);
-		ModelAndView model = new ModelAndView("CategoriaForm");
+		ModelAndView model = new ModelAndView("categoriaForm");
 		model.addObject("categoria", categoria);
 		
 		return model;

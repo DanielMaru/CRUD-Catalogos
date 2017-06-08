@@ -5,6 +5,7 @@
 	"http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Nuevo/Editar Perfil</title>
 </head>
@@ -12,20 +13,18 @@
 	<div align="center">
 		<h1>Nuevo/Editar Perfil</h1>
 		<form:form action="guardarPerfil" method="post" modelAttribute="perfilUsuario">
-		<table>
+		
 			<form:hidden path="id"/>
-			<tr>
-				<td>Nombre:</td>
-				<td><form:input path="nombre" /></td>
-			</tr>
-			<tr>
-				<td>Descripcion:</td>
-				<td><form:input path="descripcion" /></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><input type="submit" value="Guardar"></td>
-			</tr>
-		</table>
+			
+				Nombre:
+				<form:input  path="nombre" />
+			
+			
+				Descripcion:
+				<form:input path="descripcion" />
+			
+			<input class="btn btn-success" type="submit" value="Guardar">
+			
 		</form:form>
 	</div>
 </body>

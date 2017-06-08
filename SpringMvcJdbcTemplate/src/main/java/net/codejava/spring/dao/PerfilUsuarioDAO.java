@@ -12,7 +12,7 @@ import net.codejava.spring.model.PerfilUsuario;
  */
 public interface PerfilUsuarioDAO {
 	
-	public boolean guardarOActualizar(PerfilUsuario perfil);
+	public void guardarOActualizar(PerfilUsuario perfil);
 	
 	public void borrar(int perfilId);
 	

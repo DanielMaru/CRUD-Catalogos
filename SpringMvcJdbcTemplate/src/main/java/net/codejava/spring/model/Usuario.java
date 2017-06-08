@@ -5,7 +5,6 @@ public class Usuario {
 	private String nombre;
 	private String pass;
 	private int estado;
-	private String login;
 	
 	public int getId() {
 		return id;
@@ -30,12 +29,6 @@ public class Usuario {
 	}
 	public void setEstado(int estado) {
 		this.estado = estado;
-	}
-	public String getLogin() {
-		return login;
-	}
-	public void setLogin(String login) {
-		this.login = login;
 	}
 	
 	

@@ -49,12 +49,7 @@ public class PerfilUsuarioControlador {
 	
 	@RequestMapping(value = "/guardarPerfil", method = RequestMethod.POST)
 	public ModelAndView guardarPerfil(@ModelAttribute PerfilUsuario perfilUsuario) {
-		try {
-			perfilUsuarioDAO.guardarOActualizar(perfilUsuario);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+		perfilUsuarioDAO.guardarOActualizar(perfilUsuario);		
 		return new ModelAndView("redirect:/perfil");
 	}
 	
