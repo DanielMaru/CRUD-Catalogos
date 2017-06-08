@@ -110,9 +110,12 @@ CREATE TABLE `producto` (
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
+  `login`  varchar(45) NOT NULL unique,
   `pass` varchar(45) NOT NULL,
-  `estado` tinyint(4) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `estado` tinyint(4) DEFAULT '0',
+   PRIMARY KEY (id)
+  
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
