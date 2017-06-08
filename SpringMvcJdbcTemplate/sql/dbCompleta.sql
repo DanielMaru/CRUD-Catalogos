@@ -108,7 +108,7 @@ CREATE TABLE `producto` (
 --
 
 CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `login`  varchar(45) NOT NULL unique,
   `pass` varchar(45) NOT NULL,
