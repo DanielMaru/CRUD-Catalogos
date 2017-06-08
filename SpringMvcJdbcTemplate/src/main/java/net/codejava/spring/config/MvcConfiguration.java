@@ -4,6 +4,8 @@ import javax.sql.DataSource;
 
 import net.codejava.spring.dao.ContactDAO;
 import net.codejava.spring.dao.ContactDAOImpl;
+import net.codejava.spring.dao.PerfilUsuarioDAO;
+import net.codejava.spring.dao.PerfilUsuarioDAOImpl;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -47,5 +49,10 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	@Bean
 	public ContactDAO getContactDAO() {
 		return new ContactDAOImpl(getDataSource());
+	}
+	
+	@Bean
+	public PerfilUsuarioDAO getPerfilUsuarioDAO() {
+		return new PerfilUsuarioDAOImpl(getDataSource());
 	}
 }

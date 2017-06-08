@@ -7,6 +7,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import net.codejava.spring.model.Contact;
+import net.codejava.spring.model.PerfilUsuario;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,7 +19,7 @@ import org.springframework.jdbc.core.RowMapper;
  * @author www.codejava.net
  *
  */
-public class PerfilUsuarioDAOImpl implements ContactDAO {
+public class PerfilUsuarioDAOImpl implements PerfilUsuarioDAO {
 
 	private JdbcTemplate jdbcTemplate;
 	
@@ -27,68 +28,67 @@ public class PerfilUsuarioDAOImpl implements ContactDAO {
 	}
 
 	@Override
-	public void saveOrUpdate(Contact contact) {
-		if (contact.getId() > 0) {
+	public void saveOrUpdate(PerfilUsuario perfilUsuario) {
+		if (perfilUsuario.getId() > 0) {
 			// update
-			String sql = "UPDATE contact SET name=?, email=?, address=?, "
-						+ "telephone=? WHERE contact_id=?";
-			jdbcTemplate.update(sql, contact.getName(), contact.getEmail(),
-					contact.getAddress(), contact.getTelephone(), contact.getId());
+			String sql = "UPDATE perfiles_usuarios SET nomPERFIL=?, descripPERFIL=?, "
+						+ "estadoPERFIL=? WHERE idPERFIL=?";
+			jdbcTemplate.update(sql, perfilUsuario.getNombre(), perfilUsuario.getDescripcion(),
+					perfilUsuario.getEstado(), perfilUsuario.getId());
 		} else {
 			// insert
-			String sql = "INSERT INTO contact (name, email, address, telephone)"
-						+ " VALUES (?, ?, ?, ?)";
-			jdbcTemplate.update(sql, contact.getName(), contact.getEmail(),
-					contact.getAddress(), contact.getTelephone());
+			String sql = "INSERT INTO perfiles_usuarios (nomPERFIL, descripPERFIL, estadoPERFIL)"
+						+ " VALUES (?, ?, ?)";
+			jdbcTemplate.update(sql, perfilUsuario.getNombre(), perfilUsuario.getDescripcion(), perfilUsuario.getEstado());
 		}
 		
 	}
 
 	@Override
-	public void delete(int contactId) {
-		String sql = "DELETE FROM contact WHERE contact_id=?";
-		jdbcTemplate.update(sql, contactId);
+	public void delete(int perfilUsuarioId) {
+		String sql = "DELETE FROM perfiles_usuarios WHERE idPERFIL=?";
+		jdbcTemplate.update(sql, perfilUsuarioId);
 	}
 
 	@Override
-	public List<Contact> list() {
-		String sql = "SELECT * FROM contact";
-		List<Contact> listContact = jdbcTemplate.query(sql, new RowMapper<Contact>() {
+	public List<PerfilUsuario> list() {
+		String sql = "SELECT * FROM perfiles_usuarios";
+		List<PerfilUsuario> listPerfilUsuario = jdbcTemplate.query(sql, new RowMapper<PerfilUsuario>() {
 
 			@Override
-			public Contact mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Contact aContact = new Contact();
+			public PerfilUsuario mapRow(ResultSet rs, int rowNum) throws SQLException {
+				PerfilUsuario perfilUsuario = new PerfilUsuario();
 	
-				aContact.setId(rs.getInt("contact_id"));
-				aContact.setName(rs.getString("name"));
-				aContact.setEmail(rs.getString("email"));
-				aContact.setAddress(rs.getString("address"));
-				aContact.setTelephone(rs.getString("telephone"));
+				perfilUsuario.setId(rs.getInt("idPERFIL"));
+				perfilUsuario.setNombre(rs.getString("nomPERFIL"));
+				perfilUsuario.setDescripcion(rs.getString("descripPERFIL"));
+				perfilUsuario.setEstado(rs.getInt("estadoPERFIL"));
 				
-				return aContact;
+				return perfilUsuario;
 			}
 			
 		});
 		
-		return listContact;
+		return listPerfilUsuario;
 	}
 
 	@Override
-	public Contact get(int contactId) {
-		String sql = "SELECT * FROM contact WHERE contact_id=" + contactId;
-		return jdbcTemplate.query(sql, new ResultSetExtractor<Contact>() {
+	public PerfilUsuario get(int perfilId) {
+		String sql = "SELECT * FROM perfiles_usuarios WHERE idPERFIL=" + perfilId;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<PerfilUsuario>() {
 
 			@Override
-			public Contact extractData(ResultSet rs) throws SQLException,
+			public PerfilUsuario extractData(ResultSet rs) throws SQLException,
 					DataAccessException {
 				if (rs.next()) {
-					Contact contact = new Contact();
-					contact.setId(rs.getInt("contact_id"));
-					contact.setName(rs.getString("name"));
-					contact.setEmail(rs.getString("email"));
-					contact.setAddress(rs.getString("address"));
-					contact.setTelephone(rs.getString("telephone"));
-					return contact;
+					PerfilUsuario perfilUsuario = new PerfilUsuario();
+					
+					perfilUsuario.setId(rs.getInt("idPERFIL"));
+					perfilUsuario.setNombre(rs.getString("nomPERFIL"));
+					perfilUsuario.setDescripcion(rs.getString("descripPERFIL"));
+					perfilUsuario.setEstado(rs.getInt("estadoPERFIL"));
+					
+					return perfilUsuario;
 				}
 				
 				return null;
