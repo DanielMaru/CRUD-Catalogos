@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>New/Edit Perfil</title>
+<title>Nuevo/Editar Perfil</title>
 </head>
 <body>
 	<div align="center">
@@ -21,10 +21,6 @@
 			<tr>
 				<td>Descripcion:</td>
 				<td><form:input path="descripcion" /></td>
-			</tr>
-			<tr>
-				<td>Estado:</td>
-				<td><form:input path="estado" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit" value="Guardar"></td>

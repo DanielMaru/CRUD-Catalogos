@@ -30,28 +30,26 @@ public class PerfilUsuarioDAOImpl implements PerfilUsuarioDAO {
 	public void guardarOActualizar(PerfilUsuario perfilUsuario) {
 		if (perfilUsuario.getId() > 0) {
 			// update
-			String sql = "UPDATE perfiles_usuarios SET nomPERFIL=?, descripPERFIL=?, "
-						+ "estadoPERFIL=? WHERE idPERFIL=?";
-			jdbcTemplate.update(sql, perfilUsuario.getNombre(), perfilUsuario.getDescripcion(),
-					perfilUsuario.getEstado(), perfilUsuario.getId());
+			String sql = "UPDATE perfiles_usuarios SET nomPERFIL=?, descripPERFIL=? WHERE idPERFIL=?";
+			jdbcTemplate.update(sql, perfilUsuario.getNombre(), perfilUsuario.getDescripcion(), perfilUsuario.getId());
 		} else {
 			// insert
-			String sql = "INSERT INTO perfiles_usuarios (nomPERFIL, descripPERFIL, estadoPERFIL)"
-						+ " VALUES (?, ?, ?)";
-			jdbcTemplate.update(sql, perfilUsuario.getNombre(), perfilUsuario.getDescripcion(), perfilUsuario.getEstado());
+			String sql = "INSERT INTO perfiles_usuarios (nomPERFIL, descripPERFIL)"
+						+ " VALUES (?, ?)";
+			jdbcTemplate.update(sql, perfilUsuario.getNombre(), perfilUsuario.getDescripcion());
 		}
 		
 	}
 
 	@Override
 	public void borrar(int perfilUsuarioId) {
-		String sql = "DELETE FROM perfiles_usuarios WHERE idPERFIL=?";
-		jdbcTemplate.update(sql, perfilUsuarioId);
+		String sql = "UPDATE perfiles_usuarios SET estadoPERFIL=? WHERE idPERFIL=?";
+		jdbcTemplate.update(sql, 1, perfilUsuarioId);
 	}
 
 	@Override
 	public List<PerfilUsuario> listar() {
-		String sql = "SELECT * FROM perfiles_usuarios";
+		String sql = "SELECT * FROM perfiles_usuarios WHERE estadoPERFIL='0'";
 		List<PerfilUsuario> listPerfilUsuario = jdbcTemplate.query(sql, new RowMapper<PerfilUsuario>() {
 
 			@Override
@@ -73,7 +71,7 @@ public class PerfilUsuarioDAOImpl implements PerfilUsuarioDAO {
 
 	@Override
 	public PerfilUsuario obtener(int perfilId) {
-		String sql = "SELECT * FROM perfiles_usuarios WHERE idPERFIL=" + perfilId;
+		String sql = "SELECT * FROM perfiles_usuarios WHERE idPERFIL='" + perfilId +"' AND estadoPERFIL='0'";
 		return jdbcTemplate.query(sql, new ResultSetExtractor<PerfilUsuario>() {
 
 			@Override
