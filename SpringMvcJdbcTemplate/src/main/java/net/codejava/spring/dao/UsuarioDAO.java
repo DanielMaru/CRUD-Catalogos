@@ -6,9 +6,9 @@ import net.codejava.spring.model.Usuario;
 
 public interface UsuarioDAO {
 	
-	public void saveOrUpdate(Usuario usuario);
+	public boolean saveOrUpdate(Usuario usuario);
 	
-	public void delete(int id);
+	public boolean delete(int id);
 	
 	public Usuario get(int id);
 	

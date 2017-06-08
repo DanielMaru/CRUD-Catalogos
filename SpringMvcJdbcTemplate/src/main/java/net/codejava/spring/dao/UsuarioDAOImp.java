@@ -23,7 +23,9 @@ public class UsuarioDAOImp implements UsuarioDAO{
 	}
 	
 	@Override
-	public void saveOrUpdate(Usuario usuario) {
+	public boolean saveOrUpdate(Usuario usuario) {
+		boolean retorno = false;
+		try{
 		if (usuario.getId()>0) {
 			// update
 			String sql = "UPDATE usuarios SET id=?, nombre=?, pass=?, "
@@ -36,12 +38,17 @@ public class UsuarioDAOImp implements UsuarioDAO{
 						+ " VALUES (?, ?, ?, ?)";
 			jdbcTemplate.update(sql, usuario.getId(), usuario.getNombre(),
 					usuario.getPass(), usuario.getEstado());
+			
+			retorno = true;
+		}
+		}catch(Exception e){
+			retornao = false;
 		}
 		
 	}
 
 	@Override
-	public void delete(int id) {
+	public boolean delete(int id) {
 		Usuario usuario = this.get(id);
 		usuario.setEstado(1);
 		this.saveOrUpdate(usuario);

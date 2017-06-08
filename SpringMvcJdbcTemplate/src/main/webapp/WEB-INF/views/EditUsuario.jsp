@@ -6,13 +6,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <title>Modificar Usuario</title>
 </head>
 <body>
 	<div align="center">
 		<h1>Nuevo/Modificar Usuario</h1>
 		<form:form action="guardarUsuario" method="post" modelAttribute="usuario">
-		<table>
+		
 			
 			<tr>
 				<td>id:</td>
@@ -28,9 +29,9 @@
 			</tr>
 			
 			<tr>
-				<td colspan="2" align="center"><input type="submit" value="Save"></td>
+				<td colspan="2" align="center"><input type="submit" value="Save" class="btn btn-success"></td>
 			</tr>
-		</table>
+		
 		</form:form>
 	</div>
 </body>

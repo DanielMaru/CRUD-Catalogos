@@ -8,6 +8,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Usuarios</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   		 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   		 
    		<script>
 			function myFunction() {
 			  var input, filter, table, tr, td, i;
@@ -26,18 +28,39 @@
 			    }       
 			  }
 			}
+			
+			function myFunction2() {
+				  var input, filter, table, tr, td, i;
+				  input = document.getElementById("InputName");
+				  filter = input.value.toUpperCase();
+				  table = document.getElementById("myTable");
+				  tr = table.getElementsByTagName("tr");
+				  for (i = 0; i < tr.length; i++) {
+				    td = tr[i].getElementsByTagName("td")[2];
+				    if (td) {
+				      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+				        tr[i].style.display = "";
+				      } else {
+				        tr[i].style.display = "none";
+				      }
+				    }       
+				  }
+				}
 			</script>
     </head>
     <body>
     	<div align="center">
-    		<input type="text" id="InputName" onkeyup="myFunction()" placeholder="Ingrese el nombre del usuario" title="Copie un nombres">
+    		<h1>Buscar</h1>
+    		<input type="text" id="InputName2" onkeyup="myFunction2()" placeholder="nombre" title="Copie un nombres">
+    		<input type="text" id="InputName" onkeyup="myFunction()" placeholder="login" title="Copie un nombres">
 	        <h1>Lista de usuarios</h1>
-	        <h3><a href="usuarioNuevo">Agregar usuario</a></h3>
-	        <table border="1" id="myTable">
+	        <h3><a href="usuarioNuevo" class="btn btn-primary">Agregar usuario</a></h3>
+	        <div class="col-md-6 col-md-offset-3" border="3">
+	        <table border="1" id="myTable"  align="center"  class="table table-bordered table-striped ">
 	        	<th>id</th>
 	        	<th>Nombre</th>
 	        	<th>Password</th>
-
+				<th>acciones</th>
 	        	
 	        	
 				<c:forEach var="usuario" items="${listaUsuarios}" varStatus="status">
@@ -56,6 +79,7 @@
 	        	</tr>
 				</c:forEach>	        	
 			</table>
+			</div>
     	</div>
     </body>
 </html>
