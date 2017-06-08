@@ -18,12 +18,18 @@
 				<td>Nombre:</td>
 				<td><form:input path="nombre" /></td>
 			</tr>
+			
+			<tr>
+				<td>Login:</td>
+				<td><form:input path="login"/></td>
+			</tr>
+			
 			<tr>
 				<td>Password:</td>
 				<td><form:input path="pass" /></td>
 			</tr>
-
-	
+			
+			
 			
 			<tr>
 				<td colspan="2" align="center"><input type="submit" value="Save"></td>
