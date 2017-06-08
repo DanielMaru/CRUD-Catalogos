@@ -29,12 +29,12 @@ public class HomeController {
 	
 	@RequestMapping(value="/")
 	public ModelAndView listContact(ModelAndView model) throws IOException{
-		List<Contact> listContact = contactDAO.list();
-		model.addObject("listContact", listContact);
-		model.setViewName("home");
+		
+		model.setViewName("index");
 		
 		return model;
 	}
+	
 	
 	@RequestMapping(value = "/newContact", method = RequestMethod.GET)
 	public ModelAndView newContact(ModelAndView model) {
