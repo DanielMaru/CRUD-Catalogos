@@ -29,7 +29,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackages="net.codejava.spring")
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
-
+	
 	@Bean
 	public ViewResolver getViewResolver(){
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
