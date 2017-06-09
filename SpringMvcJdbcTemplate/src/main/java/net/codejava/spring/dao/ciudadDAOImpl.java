@@ -29,26 +29,36 @@ public class ciudadDAOImpl implements ciudadDAO {
 
 	
 	@Override
-	public void saveOrUpdate(ciudad ciudad) {
+	public boolean saveOrUpdate(ciudad ciudad) {
+		boolean retorno = false;
+		try{
 		if (ciudad.getIdCiudad() > 0) {
 			// update
-			String sql = "UPDATE ciudad SET NombreCiudad=?, NombreDepartamento=? "
-						+ " WHERE IdCiudad=?";
+			String sql = "UPDATE ciudad SET NombreCiudad=?, NombreDepartamento=?,estado_ciudad=?"
+						+ "estado_ciudad=?,WHERE IdCiudad=?";
 			jdbcTemplate.update(sql, ciudad.getNombreCiudad(), ciudad.getNombreDepartamento(),
-					 ciudad.getIdCiudad());
+					 ciudad.getIdCiudad(),ciudad.getestado_ciudad());
 		} else {
 			// insert
 			String sql = "INSERT INTO ciudad (NombreCiudad, NombreDepartamento)"
 						+ " VALUES (?, ?)";
 			jdbcTemplate.update(sql, ciudad.getNombreCiudad(), ciudad.getNombreDepartamento());
+			retorno = true;
+		}
+		}catch(Exception e){
+			retorno = false;
+		}
+		return retorno;
+		
 		}
 		
-	}
+
 
 	@Override
-	public void delete(int ciudadId) {
+	public boolean delete(int ciudadId) {
 		String sql = "UPDATE ciudad SET estado_ciudad=1 WHERE IdCiudad=?";
 		jdbcTemplate.update(sql, ciudadId);
+		return true;
 
 	}
 
@@ -96,6 +106,8 @@ public class ciudadDAOImpl implements ciudadDAO {
 				
 				return null;
 			}
+	
+			
 			
 		});
 	}

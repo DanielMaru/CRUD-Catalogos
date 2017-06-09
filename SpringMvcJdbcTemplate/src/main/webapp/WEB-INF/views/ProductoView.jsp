@@ -14,9 +14,9 @@
 		function myFunction() {
   		// Declare variables 
   			var input, filter, table, tr, td, i;
-  			input = document.getElementById("id");
+  			input = document.getElementById("producto_id");
   			filter = input.value.toUpperCase();
-  			table = document.getElementById("tablaPerfiles");
+  			table = document.getElementById("producto");
   			tr = table.getElementsByTagName("tr");
 
   			// Loop through all table rows, and hide those who don't match the search query
@@ -33,10 +33,12 @@
 		}
 	</script>
     	<div class="row" align="center">
+    		<h3>Buscar producto</h3>
+		<input type="text" id="producto_id" onkeyup="myFunction()" placeholder="Buscando...">
 	        <h1>Producto List</h1>
-	        <h3><a href="newProducto">New Producto</a></h3>
-	        <div class="col-md-6 col-md-offset-3">
-	        <table class="table table-striped" border="1">
+	        <h3><a href="newProducto" class="btn btn-primary ">New Producto</a></h3>
+	        <div class="col-md-6 col-md-offset-3"border="3">
+	        <table class="table table-bordered table-striped" id="producto">
 	        	<th>No</th>
 	        	<th>Nombre_Producto</th>
 	        	<th>Tipo_Producto</th>
