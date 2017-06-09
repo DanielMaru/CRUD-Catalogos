@@ -14,6 +14,8 @@ public interface CategoriaDAO {
 	
 	public Categoria get(int categoriaId);
 	
+	public boolean validar(String nombre);
+	
 	public List<Categoria> list();
 	
 	
