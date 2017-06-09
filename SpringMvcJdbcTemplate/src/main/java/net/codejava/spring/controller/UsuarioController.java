@@ -70,7 +70,12 @@ public class UsuarioController {
 			error = true;
 			mensaje = "La password no puede ser nula\n";
 		}
-		
+		//Usuario usuario2 = usuarioDAO.findByLogin(usuario.getLogin());
+//		if(usuario2!=null){
+//			error = true;
+//			mensaje = "Login no disponible";
+//		}
+//		
 		if(!error){	
 			try{
 				usuarioDAO.saveOrUpdate(usuario);
