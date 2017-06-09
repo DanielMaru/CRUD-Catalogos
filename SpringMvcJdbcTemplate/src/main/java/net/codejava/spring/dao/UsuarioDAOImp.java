@@ -42,9 +42,9 @@ public class UsuarioDAOImp implements UsuarioDAO{
 			retorno = true;
 		}
 		}catch(Exception e){
-			retornao = false;
+			retorno = false;
 		}
-		
+		return retorno;
 	}
 
 	@Override
@@ -54,6 +54,7 @@ public class UsuarioDAOImp implements UsuarioDAO{
 		this.saveOrUpdate(usuario);
 		//String sql = "DELETE FROM usuarios WHERE id=?";
 		//jdbcTemplate.update(sql, id);
+		return true;
 		
 	}
 
