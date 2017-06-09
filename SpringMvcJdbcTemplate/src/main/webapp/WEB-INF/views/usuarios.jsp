@@ -31,7 +31,7 @@
 			
 			function myFunction2() {
 				  var input, filter, table, tr, td, i;
-				  input = document.getElementById("InputName");
+				  input = document.getElementById("InputName2");
 				  filter = input.value.toUpperCase();
 				  table = document.getElementById("myTable");
 				  tr = table.getElementsByTagName("tr");
@@ -58,6 +58,7 @@
 	        <div class="col-md-6 col-md-offset-3" border="3">
 	        <table border="1" id="myTable"  align="center"  class="table table-bordered table-striped ">
 	        	<th>id</th>
+	        	<th>Login</th>
 	        	<th>Nombre</th>
 	        	<th>Password</th>
 				<th>acciones</th>
@@ -67,6 +68,7 @@
 	        	<tr>
 	        		
 					<td>${usuario.id}</td>
+					<td>${usuario.login }</td>
 					<td>${usuario.nombre}</td>
 					<td>${usuario.pass}</td>
 					
