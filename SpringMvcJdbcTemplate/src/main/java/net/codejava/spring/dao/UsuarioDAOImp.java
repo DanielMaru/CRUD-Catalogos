@@ -44,7 +44,8 @@ public class UsuarioDAOImp implements UsuarioDAO{
 			retorno = true;
 		}
 		}catch(Exception e){
-			retorno = false;
+			throw e;
+			
 		}
 		return retorno;
 	}

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,24 +47,57 @@ public class UsuarioController {
 	public ModelAndView newContact(ModelAndView model) {
 		Usuario usuarioNuevo = new Usuario();
 		model.addObject("usuario", usuarioNuevo);
+		model.addObject("error","123");
+		model.addObject("mensaje","Recuerda llenar todos los campos");
 		model.setViewName("UsuarioForm");
 		return model;
 	}
 	
 	@RequestMapping(value = "/guardarUsuario", method = RequestMethod.POST)
 	public ModelAndView saveContact(@ModelAttribute Usuario usuario) {
-		try{
-			usuarioDAO.saveOrUpdate(usuario);	
-		}catch(Exception e){
-			
+		boolean error  = false;
+		String mensaje = "";
+		if(usuario.getNombre().equals("")){
+			error = true;
+			mensaje = "El nombre no puede ser nulo/n";
 		}
+		
+		if(usuario.getLogin().equals("")){
+			error = true;
+			mensaje = "El login no puede ser nulo\n";
+		}
+		if(usuario.getPass().equals("")){
+			error = true;
+			mensaje = "La password no puede ser nula\n";
+		}
+		
+		if(!error){	
+			try{
+				usuarioDAO.saveOrUpdate(usuario);
+			}catch(Exception e){
+				error = true;
+				mensaje += "Información no valida";
+					
+			}
+		}else{
+			ModelAndView model = new ModelAndView("UsuarioForm");
+			model.addObject("mensaje", mensaje);
+			model.addObject("usuario",usuario);
+			model.addObject("error","error");
+			
+			return model;
+		}
+			
+			
 		return new ModelAndView("redirect:/usuarios");
 	}
 	
 	@RequestMapping(value = "/deleteUsuario", method = RequestMethod.GET)
 	public ModelAndView deleteContact(HttpServletRequest request) {
 		int id = Integer.parseInt(request.getParameter("id"));
-		usuarioDAO.delete(id);
+		if(id>0){
+			usuarioDAO.delete(id);
+		}
 		return new ModelAndView("redirect:/usuarios");
 	}
 	
