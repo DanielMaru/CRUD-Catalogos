@@ -10,6 +10,8 @@ import net.codejava.spring.dao.DeparDAO;
 import net.codejava.spring.dao.DeparDAOImpl;
 import net.codejava.spring.dao.PerfilUsuarioDAO;
 import net.codejava.spring.dao.PerfilUsuarioDAOImpl;
+import net.codejava.spring.dao.ProductobancoDAO;
+import net.codejava.spring.dao.ProductobancoDAOImpl;
 import net.codejava.spring.dao.UsuarioDAO;
 import net.codejava.spring.dao.UsuarioDAOImp;
 import net.codejava.spring.dao.ciudadDAO;
@@ -82,6 +84,10 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	@Bean
 	public ciudadDAO getciudadDAO() {
 		return new ciudadDAOImpl(getDataSource());
+	}
+	@Bean
+	public ProductobancoDAO getProductobancoDAO() {
+		return new ProductobancoDAOImpl(getDataSource());
 	}
 }
 	

@@ -25,6 +25,7 @@
                 <input class="btn btn-success" type="submit" value="Guardar">
         
         </form:form>
-    </div>
+        <h1>${mensaje}</h1>    
+        </div>
 </body>
 </html>

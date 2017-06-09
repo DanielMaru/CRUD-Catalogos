@@ -46,8 +46,16 @@ public class ciudadController {
 	
 	@RequestMapping(value = "/guardarciudad", method = RequestMethod.POST)
 	public ModelAndView guardarciudad(@ModelAttribute ciudad ciudad) {
-		ciudadDAO.saveOrUpdate(ciudad);		
-		return new ModelAndView("redirect:/ciudad");
+		
+		try{
+			ciudadDAO.saveOrUpdate(ciudad);
+			}catch (Exception e){
+				ModelAndView model= new ModelAndView ("ciudadForm");
+				model.addObject("mensaje", "valores no validos");
+				return model;
+			}
+			
+				return new ModelAndView("redirect:/ciudadForm");
 	}
 	
 	@RequestMapping(value = "/Eliminarciudad", method = RequestMethod.GET)

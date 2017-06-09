@@ -35,7 +35,7 @@ public class ProductobancoControlador {
 		List<Productobanco> listProductobanco = productobancoDAO.list();
 		model.addObject("listProductobanco", listProductobanco);
 		model.setViewName("ProductoView");
-		System.out.println(listProductobanco.get(0).getNom_productos());
+		//System.out.println(listProductobanco.get(0).getNom_productos());
 		
 		return model;
 	}
