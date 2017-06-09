@@ -15,20 +15,17 @@
 	<div align="center">
 		<h1>Nuevo/Editar Categoria</h1>
 		<form:form action="guardarCategoria" method="post" modelAttribute="categoria">
-		<table>
+		
 			<form:hidden path="id"/>
-			<tr>
-				<td>Nombre:</td>
-				<td><form:input path="nombre" /></td>
-			</tr>
-			<tr>
-				<td>Descripcion:</td>
-				<td><form:input path="descripcion" /></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><input  type="submit" value="Guardar"></td>
-			</tr>
-		</table>
+			
+				Nombre:
+				<form:input  path="nombre" />
+			
+			
+				Descripcion:
+				<form:input path="descripcion" />
+			
+			<input class="btn btn-success" type="submit" value="Guardar">
 		</form:form>
 	</div>
 </body>
