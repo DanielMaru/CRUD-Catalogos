@@ -12,6 +12,8 @@ import net.codejava.spring.dao.PerfilUsuarioDAO;
 import net.codejava.spring.dao.PerfilUsuarioDAOImpl;
 import net.codejava.spring.dao.UsuarioDAO;
 import net.codejava.spring.dao.UsuarioDAOImp;
+import net.codejava.spring.dao.ciudadDAO;
+import net.codejava.spring.dao.ciudadDAOImpl;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -75,6 +77,11 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	@Bean
 	public DeparDAO getDeparDAO() {
 		return new DeparDAOImpl(getDataSource());
+	}
+	
+	@Bean
+	public ciudadDAO getciudadDAO() {
+		return new ciudadDAOImpl(getDataSource());
 	}
 }
 	
