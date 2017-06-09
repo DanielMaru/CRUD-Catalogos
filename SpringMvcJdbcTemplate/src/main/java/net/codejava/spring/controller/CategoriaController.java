@@ -40,8 +40,19 @@ public class CategoriaController {
 	
 	@RequestMapping(value = "/guardarCategoria", method = RequestMethod.POST)
 	public ModelAndView guardarCategoria(@ModelAttribute Categoria categoria) {
-		categoriaDAO.guardarOActualizar(categoria);		
-		return new ModelAndView("redirect:/categorias");
+		if(!categoriaDAO.validar(categoria.getNombre())){
+			ModelAndView model= new ModelAndView();
+			Categoria nuevaCategoria = new Categoria();
+			model.addObject("categoria", nuevaCategoria);
+			model.addObject("error", "error");
+			model.setViewName("categoriaForm");
+			return model;
+		}
+		else{
+			categoriaDAO.guardarOActualizar(categoria);		
+			return new ModelAndView("redirect:/categorias");
+		}
+		
 	}
 	
 	@RequestMapping(value = "/eliminarCategoria", method = RequestMethod.GET)

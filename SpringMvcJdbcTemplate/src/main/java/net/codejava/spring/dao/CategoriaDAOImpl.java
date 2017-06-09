@@ -70,7 +70,7 @@ public class CategoriaDAOImpl implements CategoriaDAO{
 
 	@Override
 	public List<Categoria> list() {
-	
+		
 		String sql = "SELECT * FROM categorias WHERE estadoCATEGORIA='0'";
 		List<Categoria> listCategoria = jdbcTemplate.query(sql, new RowMapper<Categoria>() {
 
@@ -89,6 +89,24 @@ public class CategoriaDAOImpl implements CategoriaDAO{
 		});
 		
 		return listCategoria;
+	}
+	@Override
+	public boolean validar(String nombre) {
+		
+		String sql = "select count(idCATEGORIAS) cantidad FROM categorias where nomCATEGORIAS=? and estadoCATEGORIA='0'" ;
+		
+
+		String name = (String)jdbcTemplate.queryForObject(sql, new Object[] { nombre }, String.class);
+		
+		if(name.equals("1")){
+			return false;
+		}
+		else{
+			return true;	
+		}
+		
+		
+		
 	}
 
 }
