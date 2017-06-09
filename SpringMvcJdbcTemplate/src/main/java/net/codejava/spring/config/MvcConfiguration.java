@@ -6,6 +6,8 @@ import net.codejava.spring.dao.CategoriaDAO;
 import net.codejava.spring.dao.CategoriaDAOImpl;
 import net.codejava.spring.dao.ContactDAO;
 import net.codejava.spring.dao.ContactDAOImpl;
+import net.codejava.spring.dao.DeparDAO;
+import net.codejava.spring.dao.DeparDAOImpl;
 import net.codejava.spring.dao.PerfilUsuarioDAO;
 import net.codejava.spring.dao.PerfilUsuarioDAOImpl;
 import net.codejava.spring.dao.UsuarioDAO;
@@ -43,9 +45,9 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/contactdb");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/mydb");
 		dataSource.setUsername("root");
-		dataSource.setPassword("Admin");
+		dataSource.setPassword("");
 		
 		return dataSource;
 	}
@@ -69,4 +71,10 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	public CategoriaDAO getCategoriaDAO() {
 		return new CategoriaDAOImpl(getDataSource());
 	}
+
+	@Bean
+	public DeparDAO getDeparDAO() {
+		return new DeparDAOImpl(getDataSource());
+	}
 }
+	
