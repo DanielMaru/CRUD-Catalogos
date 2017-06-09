@@ -14,6 +14,8 @@ public interface UsuarioDAO {
 	
 	public List<Usuario> list();
 	
+	public boolean realDelete(int id);
+	
 
 	
 }

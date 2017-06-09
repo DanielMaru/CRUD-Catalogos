@@ -52,8 +52,11 @@ public class UsuarioController {
 	
 	@RequestMapping(value = "/guardarUsuario", method = RequestMethod.POST)
 	public ModelAndView saveContact(@ModelAttribute Usuario usuario) {
-		
-		usuarioDAO.saveOrUpdate(usuario);		
+		try{
+			usuarioDAO.saveOrUpdate(usuario);	
+		}catch(Exception e){
+			
+		}
 		return new ModelAndView("redirect:/usuarios");
 	}
 	

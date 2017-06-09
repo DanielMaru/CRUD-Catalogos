@@ -10,10 +10,12 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Transactional;
 
 import net.codejava.spring.model.Contact;
 import net.codejava.spring.model.Usuario;
 
+@Transactional
 public class UsuarioDAOImp implements UsuarioDAO{
 
 	private JdbcTemplate jdbcTemplate;
@@ -104,6 +106,20 @@ public class UsuarioDAOImp implements UsuarioDAO{
 		
 		return listUsuarios;
 
+	}
+
+	@Override
+	public boolean realDelete(int id) {
+		boolean retorno = false;
+		try{
+			String sql = "DELETE FROM contact WHERE contact_id=?";
+			jdbcTemplate.update(sql, id);
+			retorno = true;
+		}catch(Exception e){
+			retorno = false;
+		}
+		return retorno;
+		
 	}
 
 
