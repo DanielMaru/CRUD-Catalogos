@@ -16,6 +16,8 @@ public interface PerfilUsuarioDAO {
 	
 	public void borrar(int perfilId);
 	
+	public PerfilUsuario buscarPorNombre(String perfilNombre);
+	
 	public PerfilUsuario obtener(int perfilId);
 	
 	public List<PerfilUsuario> listar();
