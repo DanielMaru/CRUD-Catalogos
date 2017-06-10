@@ -59,31 +59,50 @@ public class UsuarioController {
 		String mensaje = "";
 		if(usuario.getNombre().equals("")){
 			error = true;
-			mensaje = "El nombre no puede ser nulo/n";
+			mensaje = "El nombre no puede ser nulo";
 		}
 		
 		if(usuario.getLogin().equals("")){
 			error = true;
-			mensaje = "El login no puede ser nulo\n";
+			mensaje = "El login no puede ser nulo";
+		}else if(!usuario.getLogin().equals("")){
+			Usuario usuario2 = usuarioDAO.findByLogin(usuario.getLogin());
+			if(usuario2!=null){
+				if(usuario2.getId()==usuario.getId()){
+					
+				}else {
+					error = true;
+					mensaje = "Login no disponible";
+				}
+			}
+			
 		}
 		if(usuario.getPass().equals("")){
 			error = true;
-			mensaje = "La password no puede ser nula\n";
+			mensaje = "La password no puede ser nula";
 		}
+			
 		
 		if(!error){	
 			try{
 				usuarioDAO.saveOrUpdate(usuario);
 			}catch(Exception e){
 				error = true;
-				mensaje += "Información no valida";
-					
+				mensaje = "Información no valida";	
 			}
-		}else{
-			ModelAndView model = new ModelAndView("UsuarioForm");
+		}
+		
+		if(error){
+			ModelAndView model;
+			if(usuario.getId()>0){
+				model = new ModelAndView("EditUsuario");
+			}else{
+				 model = new ModelAndView("UsuarioForm");
+			}
+			
 			model.addObject("mensaje", mensaje);
 			model.addObject("usuario",usuario);
-			model.addObject("error","error");			
+			model.addObject("error","error");
 			
 			return model;
 		}
@@ -91,6 +110,7 @@ public class UsuarioController {
 			
 		return new ModelAndView("redirect:/usuarios");
 	}
+	
 	
 	@RequestMapping(value = "/deleteUsuario", method = RequestMethod.GET)
 	public ModelAndView deleteContact(HttpServletRequest request) {
