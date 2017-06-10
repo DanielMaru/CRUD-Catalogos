@@ -83,7 +83,7 @@ public class UsuarioController {
 			ModelAndView model = new ModelAndView("UsuarioForm");
 			model.addObject("mensaje", mensaje);
 			model.addObject("usuario",usuario);
-			model.addObject("error","error");
+			model.addObject("error","error");			
 			
 			return model;
 		}
