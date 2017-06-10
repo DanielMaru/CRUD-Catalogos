@@ -125,7 +125,7 @@ public class UsuarioDAOImp implements UsuarioDAO{
 
 	@Override
 	public Usuario findByLogin(String login) {
-		String sql = "SELECT * FROM usuarios WHERE login=" + login+" set rowcount 0";
+		String sql = "SELECT * FROM usuarios WHERE login=\"" + login+"\" limit 1";
 		return jdbcTemplate.query(sql, new ResultSetExtractor<Usuario>() {
 
 			@Override
