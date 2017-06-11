@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import net.codejava.spring.dao.PerfilUsuarioDAO;
 import net.codejava.spring.dao.UsuarioDAO;
 import net.codejava.spring.model.Contact;
-import net.codejava.spring.model.PerfilUsuario;
 import net.codejava.spring.model.Usuario;
 
 @Controller
@@ -26,8 +24,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioDAO usuarioDAO;
 	
-	@Autowired
-	private PerfilUsuarioDAO perfilUsuarioDAO;
+
 	@RequestMapping(value="/usuarios")
 	public ModelAndView listaUsuario(ModelAndView model) throws IOException{
 		/*
@@ -71,8 +68,10 @@ public class UsuarioController {
 				if(usuario2.getId()==usuario.getId()){
 					
 				}else {
-					error = true;
-					mensaje = "Login no disponible";
+						error = true;
+						mensaje = "login no disponible";
+					
+					
 				}
 			}
 			

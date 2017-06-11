@@ -123,6 +123,30 @@ public class UsuarioDAOImp implements UsuarioDAO{
 		
 	}
 
+	@Override
+	public Usuario findByLogin(String login) {
+		String sql = "SELECT * FROM usuarios WHERE login=\""+login+"\" limit 1";
+		return jdbcTemplate.query(sql, new ResultSetExtractor<Usuario>() {
+
+			@Override
+			public Usuario extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				if (rs.next()) {
+					Usuario usuario = new Usuario();
+					usuario.setId(rs.getInt("id"));
+					usuario.setNombre(rs.getString("nombre"));
+					usuario.setPass(rs.getString("pass"));
+					usuario.setEstado(rs.getInt("estado"));
+					usuario.setLogin(rs.getString("login"));
+					return usuario;
+				}
+				
+				return null;
+
+			}
+		});
+	}
+
 
 	
 

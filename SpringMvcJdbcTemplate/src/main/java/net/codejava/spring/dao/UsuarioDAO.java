@@ -16,6 +16,7 @@ public interface UsuarioDAO {
 	
 	public boolean realDelete(int id);
 	
+	public Usuario findByLogin(String login);
 
 	
 }
