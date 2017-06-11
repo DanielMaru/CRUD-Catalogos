@@ -44,7 +44,15 @@ public class CategoriaController {
 			ModelAndView model= new ModelAndView();
 			Categoria nuevaCategoria = new Categoria();
 			model.addObject("categoria", nuevaCategoria);
-			model.addObject("error", "error");
+			model.addObject("error", "La categoria ya existe");
+			model.setViewName("categoriaForm");
+			return model;
+		}
+		else if(categoria.getNombre()=="" || categoria.getDescripcion()==""){
+			ModelAndView model= new ModelAndView();
+			Categoria nuevaCategoria = new Categoria();
+			model.addObject("categoria", nuevaCategoria);
+			model.addObject("error", "Los campos no pueden estr vacios");
 			model.setViewName("categoriaForm");
 			return model;
 		}

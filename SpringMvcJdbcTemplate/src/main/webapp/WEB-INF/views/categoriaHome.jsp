@@ -50,9 +50,9 @@
 					<td>${categoria.nombre}</td>
 					<td>${categoria.descripcion}</td>
 					<td>
-						<a href="editarCategoria?id=${categoria.id}">Editar</a>
+						<a href="editarCategoria?id=${categoria.id}" class="btn btn-info">Editar</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="eliminarCategoria?id=${categoria.id}">Borrar</a>
+						<a href="eliminarCategoria?id=${categoria.id}" class="btn btn-danger">Borrar</a>
 					</td>
 							
 	        	</tr>

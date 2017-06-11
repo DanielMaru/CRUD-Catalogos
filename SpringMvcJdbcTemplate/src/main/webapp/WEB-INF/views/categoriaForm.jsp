@@ -14,43 +14,53 @@
 
 </head>
 <body>
-	<c:if test="${error=='error'}"><script>$(function() {  $("#myModal").modal();  });</script></c:if>
-	<div align="center">
-		<h1>Nuevo/Editar Categoria</h1>
+	<c:if test="${error!=null}"><script>$(function() {  $("#myModal").modal();  });</script></c:if>
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
 		
-		<form:form action="guardarCategoria" method="post" modelAttribute="categoria">
-		
-			<form:hidden path="id"/>
+			<center><h1 class="text-info">Nuevo/Editar Categoria</h1></center><br><br>
+					
+			<form:form action="guardarCategoria" method="post" modelAttribute="categoria" class="form-horizontal">
+				<div class="form-group">
+			      <label class="control-label col-sm-2" for="nombre">Nombre</label>
+			      <div class="col-sm-10">
+			      	<form:input  path="nombre" class="form-control"/>		        
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      <label class="control-label col-sm-2" for="descripcion">Descripcion</label>
+			      <div class="col-sm-10">
+			      	<form:input  path="descripcion" class="form-control"/>		        
+			      </div>
+			    </div>
+			    <div class="form-group">        
+			      <div class="col-sm-offset-2 col-sm-10">
+			        <input class="btn btn-success" type="submit" value="Guardar">
+			      </div>
+			    </div>			
+			</form:form>
 			
-				Nombre:
-				<form:input  path="nombre" />
-			
-			
-				Descripcion:
-				<form:input path="descripcion" />
-			
-			<input class="btn btn-success" type="submit" value="Guardar">
-		</form:form>
-		
-		<div class="modal fade" id="myModal" role="dialog">
-		    <div class="modal-dialog">
-		    
-		      <!-- Modal content-->
-		      <div class="modal-content">
-		        <div class="modal-header">
-		          <button type="button" class="close" data-dismiss="modal">&times;</button>
-		          <h4 class="modal-title">Error</h4>
-		        </div>
-		        <div class="modal-body">
-		          <p>la categoria ya existe.</p>
-		        </div>
-		        <div class="modal-footer">
-		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        </div>
-		      </div>
-		      
-		    </div>
-	  	</div>
+			<div class="modal fade" id="myModal" role="dialog">
+			    <div class="modal-dialog">
+			    
+			      <!-- Modal content-->
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h1 class="modal-title">Error</h1>
+			        </div>
+			        <div class="modal-body">
+			          <p>${error}</p>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+			        </div>
+			      </div>
+			      
+			    </div>
+		  	</div>
+		  	
+		</div>
 	</div>
 </body>
 </html>
