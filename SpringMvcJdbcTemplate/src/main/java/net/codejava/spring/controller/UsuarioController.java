@@ -64,13 +64,13 @@ public class UsuarioController {
 			mensaje = "El login no puede ser nulo";
 		}else if(!usuario.getLogin().equals("")){
 			Usuario usuario2 = usuarioDAO.findByLogin(usuario.getLogin());
+			System.out.println(usuario.getId());
 			if(usuario2!=null){
 				if(usuario2.getId()==usuario.getId()){
 					
 				}else {
 						error = true;
 						mensaje = "login no disponible";
-					
 					
 				}
 			}
@@ -95,6 +95,7 @@ public class UsuarioController {
 			ModelAndView model;
 			if(usuario.getId()>0){
 				model = new ModelAndView("EditUsuario");
+				System.out.println("Entro");
 			}else{
 				 model = new ModelAndView("UsuarioForm");
 			}

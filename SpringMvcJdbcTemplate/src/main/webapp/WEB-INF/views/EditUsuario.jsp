@@ -21,7 +21,8 @@
 			
 			<tr>
 				<td>id:</td>
-				<td><form:input path="id"/></td>
+				<input type="text" id="id" name="id" value="${usuario.getId() }" readonly/>
+				
 			</tr>
 			
 			<tr>
