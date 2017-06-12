@@ -16,6 +16,11 @@ public class Categoria {
 		this.descripcion = descripcion;
 		this.estadoEliminado = estadoEliminado;
 	}
+	public Categoria(String nombre, String descripcion) {
+			
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+	}
 	public int getId() {
 		return id;
 	}
