@@ -8,6 +8,11 @@ public class Depar {
 
 	public Depar() {
 	}
+	
+	public Depar(String nombre_depart, String descrip_depart) {
+		this.nombre_depart = nombre_depart;
+		this.descrip_depart = descrip_depart;
+	}
 
 	public Depar(int id_depart, String nombre_depart, String descrip_depart, int status_depart) {
 		this.id_depart = id_depart;
