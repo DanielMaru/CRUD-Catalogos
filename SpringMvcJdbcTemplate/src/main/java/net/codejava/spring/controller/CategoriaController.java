@@ -52,7 +52,7 @@ public class CategoriaController {
 			ModelAndView model= new ModelAndView();
 			Categoria nuevaCategoria = new Categoria();
 			model.addObject("categoria", nuevaCategoria);
-			model.addObject("error", "Los campos no pueden estr vacios");
+			model.addObject("error", "Los campos no pueden estar vacios");
 			model.setViewName("categoriaForm");
 			return model;
 		}
