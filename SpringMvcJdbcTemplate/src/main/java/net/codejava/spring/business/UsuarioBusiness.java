@@ -10,8 +10,12 @@ import net.codejava.spring.model.Usuario;
 
 @Service
 public class UsuarioBusiness {
-	@Autowired
 	private UsuarioDAO usuarioDAO;
+	
+	@Autowired
+	public UsuarioBusiness(UsuarioDAO usuarioDao){
+		this.usuarioDAO = usuarioDao;
+	}
 	public List<Usuario> list() {
 		return usuarioDAO.list();
 	}
@@ -20,8 +24,17 @@ public class UsuarioBusiness {
 	public boolean saveOrUpdate(Usuario usuario) throws Exception {
 		boolean retorno = false;
 		try{
-			usuarioDAO.saveOrUpdate(usuario);
-			retorno = true;
+			Usuario usuarioTemp = usuarioDAO.findByLogin(usuario.getLogin());
+			if(usuarioTemp==null){
+				usuarioDAO.saveOrUpdate(usuario);
+				retorno = true;
+			}else if(usuarioTemp.getId()==usuario.getId()){
+				usuarioDAO.saveOrUpdate(usuario);
+				retorno = true;
+			}else{
+				retorno=false;
+			}
+			
 		}catch(Exception e){
 			throw new Exception();
 		}
