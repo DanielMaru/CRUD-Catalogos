@@ -29,7 +29,7 @@ public class CategoriaTest {
 	@Test
 	public void noGuardarPerfilSiElNombreYaExiste(){
 		//arrange
-		Categoria categoria = new Categoria("Alimentos", "Comestibles");
+		Categoria categoria = new Categoria("Home", "Comestibles");
 		
 		//act
 		if(categoriaDAO.validar(categoria.getNombre())==true){
