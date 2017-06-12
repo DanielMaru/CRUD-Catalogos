@@ -26,6 +26,7 @@
 		
 		<form:form action="guardarDepart" method="post"  modelAttribute="depar" class="form-horizontal">
 		<div class="form-group">
+				<form:hidden path="id_depart"/>
 			      <label class="control-label col-sm-2" for="nombre">Nombre</label>
 			      <div class="col-sm-10">
 			      	<form:input  path="nombre_depart" class="form-control"/>		        

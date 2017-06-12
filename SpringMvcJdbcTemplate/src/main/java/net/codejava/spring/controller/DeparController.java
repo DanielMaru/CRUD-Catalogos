@@ -53,28 +53,36 @@ public class DeparController {
 	
 	@RequestMapping(value = "/guardarDepart", method = RequestMethod.POST)
 	public ModelAndView guardarDepart(@ModelAttribute Depar depar) {
-		if(!deparBusiness.validar(depar.getNombre_depart())){
-			ModelAndView model= new ModelAndView();
-			Depar nuevoDepart = new Depar();
-			model.addObject("depar", nuevoDepart);
-			model.addObject("error", "El departamento ya existe.");
-			model.setViewName("DeparForm");
-			return model;
-		}
-		else if(depar.getNombre_depart()=="" ||depar.getDescrip_depart()==""){
-			ModelAndView model= new ModelAndView();
-			Depar nuevoDepart = new Depar();
-			model.addObject("depar", nuevoDepart);
-			model.addObject("error", "Los campos no pueden estar vacios");
-			model.setViewName("DeparForm");
-            return model;
-		}
-		else{
-			deparBusiness.saveOrUpdate(depar);		
+		System.out.print(depar.getId_depart());
+		if(depar.getId_depart() > 0){
+			System.out.print("dasfsaffa");
+			deparBusiness.saveOrUpdate(depar);
 			return new ModelAndView("redirect:/departamento");
 		}
 		
+		else{
+			if(!deparBusiness.validar(depar.getNombre_depart())){
+				ModelAndView model= new ModelAndView();
+				Depar nuevoDepart = new Depar();
+				model.addObject("depar", nuevoDepart);
+				model.addObject("error", "El departamento ya existe.");
+				model.setViewName("DeparForm");
+				return model;
+			}
+			else if(depar.getNombre_depart()=="" ||depar.getDescrip_depart()==""){
+				ModelAndView model= new ModelAndView();
+				Depar nuevoDepart = new Depar();
+				model.addObject("depar", nuevoDepart);
+				model.addObject("error", "Los campos no pueden estar vacios");
+				model.setViewName("DeparForm");
+	            return model;
+			}
+			else{
+				deparBusiness.saveOrUpdate(depar);		
+				return new ModelAndView("redirect:/departamento");
+			}
 		
+		}
 	}
 	
 	@RequestMapping(value = "/borrarDepart", method = RequestMethod.GET)
