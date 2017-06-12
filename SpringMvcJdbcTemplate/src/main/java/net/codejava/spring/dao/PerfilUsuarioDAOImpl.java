@@ -93,5 +93,30 @@ public class PerfilUsuarioDAOImpl implements PerfilUsuarioDAO {
 			
 		});
 	}
+	
+	@Override
+	public PerfilUsuario buscarPorNombre(String perfilNombre){
+		String sql = "SELECT * FROM perfiles_usuarios WHERE nomPERFIL='" + perfilNombre +"' AND estadoPERFIL='0'";
+		return jdbcTemplate.query(sql, new ResultSetExtractor<PerfilUsuario>() {
+
+			@Override
+			public PerfilUsuario extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				if (rs.next()) {
+					PerfilUsuario perfilUsuario = new PerfilUsuario();
+					
+					perfilUsuario.setId(rs.getInt("idPERFIL"));
+					perfilUsuario.setNombre(rs.getString("nomPERFIL"));
+					perfilUsuario.setDescripcion(rs.getString("descripPERFIL"));
+					perfilUsuario.setEstado(rs.getInt("estadoPERFIL"));
+					
+					return perfilUsuario;
+				}
+				
+				return null;
+			}
+			
+		});
+	}
 
 }
