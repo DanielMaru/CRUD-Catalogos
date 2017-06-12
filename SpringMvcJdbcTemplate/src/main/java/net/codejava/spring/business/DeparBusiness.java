@@ -46,8 +46,8 @@ public class DeparBusiness {
 		
 	}
 
-	public Depar get(int perfilId) {
-		return DeparDAO.get(perfilId);
+	public Depar get(int id_depart) {
+		return DeparDAO.get(id_depart);
 	}
 	
 	
