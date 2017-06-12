@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.codejava.spring.dao.ciudadDAO;
 import net.codejava.spring.model.ciudad;
+//import net.codejava.spring.model.ciudad;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,16 +47,18 @@ public class ciudadController {
 	
 	@RequestMapping(value = "/guardarciudad", method = RequestMethod.POST)
 	public ModelAndView guardarciudad(@ModelAttribute ciudad ciudad) {
-		
-		try{
-			ciudadDAO.saveOrUpdate(ciudad);
-			}catch (Exception e){
-				ModelAndView model= new ModelAndView ("ciudadForm");
-				model.addObject("mensaje", "valores no validos");
-				return model;
-			}
-			
-				return new ModelAndView("redirect:/ciudadForm");
+		if(!ciudadDAO.validar(ciudad.getNombreCiudad())){
+			ModelAndView model= new ModelAndView();
+			ciudad nuevaciudad = new ciudad();
+			model.addObject("ciudad", nuevaciudad);
+			model.addObject("error", "error");
+			model.setViewName("ciudadForm");
+			return model;
+		}
+		else{
+			ciudadDAO.saveOrUpdate(ciudad);		
+			return new ModelAndView("redirect:/ciudad");
+		}
 	}
 	
 	@RequestMapping(value = "/Eliminarciudad", method = RequestMethod.GET)
@@ -69,8 +72,8 @@ public class ciudadController {
 	@RequestMapping(value = "/Editarciudad", method = RequestMethod.GET)
 	public ModelAndView Editarciudad(HttpServletRequest request) {
 		
-		int ciudadid = Integer.parseInt(request.getParameter("IdCiudad"));
-		ciudad ciudad = ciudadDAO.get(ciudadid);
+		int IdCiudad = Integer.parseInt(request.getParameter("IdCiudad"));
+		ciudad ciudad = ciudadDAO.get(IdCiudad);
 		ModelAndView model = new ModelAndView("ciudadForm");
 		model.addObject("ciudad", ciudad);
 		
