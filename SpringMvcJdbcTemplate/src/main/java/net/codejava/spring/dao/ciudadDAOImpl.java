@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import net.codejava.spring.model.PerfilUsuario;
 import net.codejava.spring.model.Usuario;
 import net.codejava.spring.model.ciudad;
 
@@ -15,7 +16,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 /**
- * An implementation of the ContactDAO interface.
+ * An implementation of the ciudadDAO interface.
  * @author www.codejava.net
  *
  */
@@ -29,36 +30,29 @@ public class ciudadDAOImpl implements ciudadDAO {
 
 	
 	@Override
-	public boolean saveOrUpdate(ciudad ciudad) {
-		boolean retorno = false;
-		try{
+	public void saveOrUpdate(ciudad ciudad) {
 		if (ciudad.getIdCiudad() > 0) {
 			// update
-			String sql = "UPDATE ciudad SET NombreCiudad=?, NombreDepartamento=?,estado_ciudad=?"
-						+ "estado_ciudad=?,WHERE IdCiudad=?";
+			String sql = "UPDATE ciudad SET NombreCiudad=?, NombreDepartamento=? WHERE idciudad=?";
 			jdbcTemplate.update(sql, ciudad.getNombreCiudad(), ciudad.getNombreDepartamento(),
-					 ciudad.getIdCiudad(),ciudad.getestado_ciudad());
+					 ciudad.getIdCiudad());
 		} else {
 			// insert
 			String sql = "INSERT INTO ciudad (NombreCiudad, NombreDepartamento)"
 						+ " VALUES (?, ?)";
 			jdbcTemplate.update(sql, ciudad.getNombreCiudad(), ciudad.getNombreDepartamento());
-			retorno = true;
+			
 		}
-		}catch(Exception e){
-			retorno = false;
-		}
-		return retorno;
 		
 		}
 		
 
 
 	@Override
-	public boolean delete(int ciudadId) {
+	public void delete(int ciudadId) {
 		String sql = "UPDATE ciudad SET estado_ciudad=1 WHERE IdCiudad=?";
 		jdbcTemplate.update(sql, ciudadId);
-		return true;
+		
 
 	}
 
@@ -79,17 +73,41 @@ public class ciudadDAOImpl implements ciudadDAO {
 				
 				return aciudad;
 			}
-			
-			
-
-		});
 		
+	});
 		return listciudad;
-	}
+}
+			
+			@Override
+			public ciudad Obtener(int ciudadId) {
+				String sql = "SELECT * FROM ciudad WHERE IdCiudad='" + ciudadId +"' AND estado_ciudad='0'";
+				return jdbcTemplate.query(sql, new ResultSetExtractor<ciudad>() {
+
+					@Override
+					public ciudad extractData(ResultSet rs) throws SQLException,
+							DataAccessException {
+						if (rs.next()) {
+							ciudad ciudad = new ciudad();
+							
+							ciudad.setIdCiudad(rs.getInt("idCiudad"));
+							ciudad.setNombreCiudad(rs.getString("Nombreciudad"));
+							ciudad.setNombreDepartamento(rs.getString("NombreDepartamento"));
+							ciudad.setestado_ciudad(rs.getInt("estado_ciudad"));
+							
+							return ciudad;
+						}
+						
+						return null;
+					}
+					
+				});
+			}
+		
+	
 
 	@Override
-	public ciudad get(int idCiudad) {
-		String sql = "SELECT * FROM ciudad WHERE IdCiudad='" + idCiudad +"' AND estado_ciudad='0'";
+	public ciudad buscarPorNombreCiudad (String buscarPorNombreCiudad) {
+		String sql = "SELECT * FROM ciudad WHERE IdCiudad='" + buscarPorNombreCiudad +"' AND estado_ciudad='0'";
 		return jdbcTemplate.query(sql, new ResultSetExtractor<ciudad>() {
 
 			@Override

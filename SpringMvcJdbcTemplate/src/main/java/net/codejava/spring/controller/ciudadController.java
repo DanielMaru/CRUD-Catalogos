@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.codejava.spring.business.CiudadBusiness2;
 import net.codejava.spring.dao.ciudadDAO;
+import net.codejava.spring.model.PerfilUsuario;
 import net.codejava.spring.model.ciudad;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +27,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class ciudadController {
 
 	@Autowired
-	private ciudadDAO ciudadDAO;
+	private CiudadBusiness2 ciudadBusiness2;
 	
 	@RequestMapping(value="/ciudad")
 	public ModelAndView listciudad(ModelAndView model) throws IOException{
-		List<ciudad> listciudad = ciudadDAO.list();
+		List<ciudad> listciudad = ciudadBusiness2.listar();
 		model.addObject("listciudad", listciudad);
 		model.setViewName("ciudadView");
 		
@@ -46,31 +48,39 @@ public class ciudadController {
 	
 	@RequestMapping(value = "/guardarciudad", method = RequestMethod.POST)
 	public ModelAndView guardarciudad(@ModelAttribute ciudad ciudad) {
+
+		String mensaje = "";
+		if(ciudad.equals("") || ciudad.equals("")){
+			mensaje = "Debe ingresar todos los campos";
+		}else{
+			mensaje = ciudadBusiness2.saveOrUpdate(ciudad);
+		}
 		
-		try{
-			ciudadDAO.saveOrUpdate(ciudad);
-			}catch (Exception e){
-				ModelAndView model= new ModelAndView ("ciudadForm");
-				model.addObject("mensaje", "valores no validos");
-				return model;
-			}
+		if(!mensaje.equals("")){
+			ModelAndView model= new ModelAndView();
+			model.addObject("mensaje", mensaje);
+			model.addObject("ciudad", ciudad);
+			model.addObject("error", "error");
+			model.setViewName("ciudadForm"); 			
 			
-				return new ModelAndView("redirect:/ciudadForm");
+			return model;
+		}
+		return new ModelAndView("redirect:/ciudad");
 	}
+	
 	
 	@RequestMapping(value = "/Eliminarciudad", method = RequestMethod.GET)
 	public ModelAndView Eliminarciudad(HttpServletRequest request) {
 		
 		int ciudadId = Integer.parseInt(request.getParameter("IdCiudad"));
-		ciudadDAO.delete(ciudadId);
+		ciudadBusiness2.delete(ciudadId);
 		return new ModelAndView("redirect:/ciudad");
 	}
 	
 	@RequestMapping(value = "/Editarciudad", method = RequestMethod.GET)
 	public ModelAndView Editarciudad(HttpServletRequest request) {
-		
-		int ciudadid = Integer.parseInt(request.getParameter("IdCiudad"));
-		ciudad ciudad = ciudadDAO.get(ciudadid);
+		int CiudadId = Integer.parseInt(request.getParameter("IdCiudad"));
+		ciudad ciudad = ciudadBusiness2.Obtener(CiudadId);
 		ModelAndView model = new ModelAndView("ciudadForm");
 		model.addObject("ciudad", ciudad);
 		

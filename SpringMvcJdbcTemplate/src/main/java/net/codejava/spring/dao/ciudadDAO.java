@@ -2,6 +2,7 @@ package net.codejava.spring.dao;
 
 import java.util.List;
 
+import net.codejava.spring.model.PerfilUsuario;
 import net.codejava.spring.model.ciudad;
 
 /**
@@ -11,11 +12,13 @@ import net.codejava.spring.model.ciudad;
  */
 public interface ciudadDAO {
 	
-	public boolean saveOrUpdate(ciudad ciudad);
+	public void saveOrUpdate(ciudad ciudad);
 	
-	public boolean delete(int idCiudad);
+	public void delete(int idCiudad);
 	
-	public ciudad get(int idCiudad);
+	public ciudad buscarPorNombreCiudad(String buscarPorNombreCiudad);
+	
+	public ciudad Obtener(int CiudadId);
 	
 	public List<ciudad> list();
 	

@@ -30,10 +30,10 @@
 			   <a href="perfil" class="btn btn-info btn-lg btn-block" role="button">Departamentos </a>
 			</div>
 			<div class="col-md-6 col-md-offset-3">
-			   <a href="perfil" class="btn btn-primary btn-lg btn-block" role="button">Ciudades </a>
+			   <a href="ciudad" class="btn btn-primary btn-lg btn-block" role="button">Ciudades </a>
 			</div>
 			<div class="col-md-6 col-md-offset-3">
-			   <a href="perfil" class="btn btn-info btn-lg btn-block" role="button">Productos </a>
+			   <a href="producto" class="btn btn-info btn-lg btn-block" role="button">Productos </a>
 			</div>
         </div>
 
