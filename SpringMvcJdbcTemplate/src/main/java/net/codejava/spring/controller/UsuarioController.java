@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.codejava.spring.business.UsuarioBusiness;
-import net.codejava.spring.dao.PerfilUsuarioDAO;
+
+
 import net.codejava.spring.dao.UsuarioDAO;
 import net.codejava.spring.model.Contact;
-import net.codejava.spring.model.PerfilUsuario;
 import net.codejava.spring.model.Usuario;
 
 @Controller
@@ -65,12 +65,14 @@ public class UsuarioController {
 			mensaje = "El login no puede ser nulo";
 		}else if(!usuario.getLogin().equals("")){
 			Usuario usuario2 = usuarioBusiness.findByLogin(usuario.getLogin());
+
 			if(usuario2!=null){
 				if(usuario2.getId()==usuario.getId()){
 					
 				}else {
-					error = true;
-					mensaje = "Login no disponible";
+						error = true;
+						mensaje = "login no disponible";
+					
 				}
 			}
 			
@@ -94,6 +96,7 @@ public class UsuarioController {
 			ModelAndView model;
 			if(usuario.getId()>0){
 				model = new ModelAndView("EditUsuario");
+				System.out.println("Entro");
 			}else{
 				 model = new ModelAndView("UsuarioForm");
 			}
