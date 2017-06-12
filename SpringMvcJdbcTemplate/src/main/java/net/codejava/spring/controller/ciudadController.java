@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.codejava.spring.business.CiudadBusiness2;
 import net.codejava.spring.dao.ciudadDAO;
-import net.codejava.spring.model.Depar;
-import net.codejava.spring.model.PerfilUsuario;
 import net.codejava.spring.model.ciudad;
 
 import org.springframework.beans.factory.annotation.Autowired;

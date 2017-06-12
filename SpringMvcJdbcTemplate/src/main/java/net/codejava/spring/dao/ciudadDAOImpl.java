@@ -6,8 +6,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import net.codejava.spring.model.PerfilUsuario;
-import net.codejava.spring.model.Usuario;
+
 import net.codejava.spring.model.ciudad;
 
 import org.springframework.dao.DataAccessException;
