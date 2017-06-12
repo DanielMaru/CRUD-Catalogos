@@ -1,39 +1,41 @@
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import net.codejava.spring.dao.PerfilUsuarioDAOImpl;
+import net.codejava.spring.business.PerfilUsuarioBusiness;
+import net.codejava.spring.dao.PerfilUsuarioDAO;
 import net.codejava.spring.model.PerfilUsuario;
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
+@RunWith(MockitoJUnitRunner.class)
 public class PerfilUsuarioTest {
 	
-	private PerfilUsuarioDAOImpl perfilUsuarioDaoImpl;
+	private PerfilUsuarioBusiness perfilUsuarioBusiness;
+	
+	@Mock
+	private PerfilUsuarioDAO perfilUsuarioDao;
 	
 	@Before
 	public void setUp(){
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/mydb");
-		dataSource.setUsername("root");
-		dataSource.setPassword("Admin");
-		
-		perfilUsuarioDaoImpl = new PerfilUsuarioDAOImpl(dataSource);
+		perfilUsuarioBusiness = new PerfilUsuarioBusiness(perfilUsuarioDao);
 	}
 	
 	@Test
-	public void guardarPerfilSiNoExiste(){
+	public void noGuardarPerfilSiElNombreYaExiste(){
 		//arrange
-		//PerfilUsuario perfilUsuario = new PerfilUsuario("Recursos humanos", "Encargado de la gestion de recursos humanos");
+		PerfilUsuario perfilUsuarioARetornar = new PerfilUsuario("Recursos humanos", "Encargado de la gestion de recursos humanos");
+		PerfilUsuario perfilUsuario = new PerfilUsuario("Recursos humanos", "Encargado de la gestion de recursos humanos");
 		
 		//act
-		//boolean resultado = perfilUsuarioDaoImpl.guardarOActualizar(perfilUsuario);
+		when(perfilUsuarioDao.buscarPorNombre(perfilUsuario.getNombre())).thenReturn(perfilUsuarioARetornar);
+		String resultado = perfilUsuarioBusiness.guardarOActualizar(perfilUsuario);
 		
 		//assert
-		//assertTrue(resultado);
+		assertEquals("El nombre del perfil ya existe", resultado);
 	}
 }
