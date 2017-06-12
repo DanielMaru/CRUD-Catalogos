@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.codejava.spring.business.UsuarioBusiness;
 import net.codejava.spring.dao.PerfilUsuarioDAO;
 import net.codejava.spring.dao.UsuarioDAO;
 import net.codejava.spring.model.Contact;
@@ -24,10 +25,9 @@ public class UsuarioController {
 	
 	
 	@Autowired
-	private UsuarioDAO usuarioDAO;
+	private UsuarioBusiness usuarioBusiness;
 	
-	@Autowired
-	private PerfilUsuarioDAO perfilUsuarioDAO;
+
 	@RequestMapping(value="/usuarios")
 	public ModelAndView listaUsuario(ModelAndView model) throws IOException{
 		/*
@@ -36,7 +36,7 @@ public class UsuarioController {
 		model.setViewName("perfilView"); //NOMBRE DE LA VISTA PERFIL
 		*/
 		
-		List<Usuario> listaUsuarios = usuarioDAO.list();
+		List<Usuario> listaUsuarios = usuarioBusiness.list();
 		model.addObject("listaUsuarios",listaUsuarios);
 		model.setViewName("usuarios");
 		
@@ -47,8 +47,6 @@ public class UsuarioController {
 	public ModelAndView newContact(ModelAndView model) {
 		Usuario usuarioNuevo = new Usuario();
 		model.addObject("usuario", usuarioNuevo);
-		model.addObject("error","123");
-		model.addObject("mensaje","Recuerda llenar todos los campos");
 		model.setViewName("UsuarioForm");
 		return model;
 	}
@@ -66,7 +64,7 @@ public class UsuarioController {
 			error = true;
 			mensaje = "El login no puede ser nulo";
 		}else if(!usuario.getLogin().equals("")){
-			Usuario usuario2 = usuarioDAO.findByLogin(usuario.getLogin());
+			Usuario usuario2 = usuarioBusiness.findByLogin(usuario.getLogin());
 			if(usuario2!=null){
 				if(usuario2.getId()==usuario.getId()){
 					
@@ -85,7 +83,7 @@ public class UsuarioController {
 		
 		if(!error){	
 			try{
-				usuarioDAO.saveOrUpdate(usuario);
+				usuarioBusiness.saveOrUpdate(usuario);
 			}catch(Exception e){
 				error = true;
 				mensaje = "Información no valida";	
@@ -116,7 +114,7 @@ public class UsuarioController {
 	public ModelAndView deleteContact(HttpServletRequest request) {
 		int id = Integer.parseInt(request.getParameter("id"));
 		if(id>0){
-			usuarioDAO.delete(id);
+			usuarioBusiness.delete(id);
 		}
 		return new ModelAndView("redirect:/usuarios");
 	}
@@ -124,7 +122,7 @@ public class UsuarioController {
 	@RequestMapping(value = "/editUsuario", method = RequestMethod.GET)
 	public ModelAndView editContact(HttpServletRequest request) {
 		int id = Integer.parseInt(request.getParameter("id"));
-		Usuario usuario = usuarioDAO.get(id);
+		Usuario usuario = usuarioBusiness.get(id);
 		ModelAndView model = new ModelAndView("EditUsuario");
 		model.addObject("usuario", usuario);
 		
