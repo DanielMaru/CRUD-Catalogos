@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import net.codejava.spring.dao.DeparDAO;
+import net.codejava.spring.model.Categoria;
 import net.codejava.spring.model.Depar;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,6 @@ public class DeparController {
 		List<Depar> listDepart = departamentoDAO.list();
 		model.addObject("listContact", listDepart);
 		model.setViewName("DeparHome");
-		
 		return model;
 	}
 	
@@ -44,10 +44,33 @@ public class DeparController {
 		return model;
 	}
 	
+	
+	
+	
 	@RequestMapping(value = "/guardarDepart", method = RequestMethod.POST)
-	public ModelAndView guardarDepart(@ModelAttribute Depar guardarDepart) {
-		departamentoDAO.saveOrUpdate(guardarDepart);		
-		return new ModelAndView("redirect:/departamento");
+	public ModelAndView guardarDepart(@ModelAttribute Depar depar) {
+		if(!departamentoDAO.validar(depar.getNombre_depart())){
+			ModelAndView model= new ModelAndView();
+			Depar nuevoDepart = new Depar();
+			model.addObject("depar", nuevoDepart);
+			model.addObject("error", "El departamento ya existe.");
+			model.setViewName("DeparForm");
+			return model;
+		}
+		else if(depar.getNombre_depart()=="" ||depar.getDescrip_depart()==""){
+			ModelAndView model= new ModelAndView();
+			Depar nuevoDepart = new Depar();
+			model.addObject("depar", nuevoDepart);
+			model.addObject("error", "Los campos no pueden estar vacios");
+			model.setViewName("DeparForm");
+            return model;
+		}
+		else{
+			departamentoDAO.saveOrUpdate(depar);		
+			return new ModelAndView("redirect:/departamento");
+		}
+		
+		
 	}
 	
 	@RequestMapping(value = "/borrarDepart", method = RequestMethod.GET)

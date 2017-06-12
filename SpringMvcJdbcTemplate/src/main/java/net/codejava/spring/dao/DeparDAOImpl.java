@@ -74,6 +74,26 @@ public class DeparDAOImpl implements DeparDAO {
 		
 		return listContact;
 	}
+	
+	@Override
+	public boolean validar(String nombre) {
+		
+		String sql = "select count(id_depart) cantidad FROM departamento where nombre_depart=? and status_depart='0'" ;
+		
+
+		String name = (String)jdbcTemplate.queryForObject(sql, new Object[] { nombre }, String.class);
+		
+		if(name.equals("1")){
+			return false;
+		}
+		else{
+			return true;	
+		}
+		
+		
+		
+	}
+
 
 	@Override
 	public Depar get(int id_depart) {
@@ -97,5 +117,7 @@ public class DeparDAOImpl implements DeparDAO {
 			
 		});
 	}
+	
+	
 
 }
