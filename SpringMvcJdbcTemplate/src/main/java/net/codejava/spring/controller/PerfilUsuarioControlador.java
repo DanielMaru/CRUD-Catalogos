@@ -5,7 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.codejava.spring.dao.ContactDAO;
+import net.codejava.spring.business.PerfilUsuarioBusiness;
+
 import net.codejava.spring.dao.PerfilUsuarioDAO;
 import net.codejava.spring.model.Contact;
 import net.codejava.spring.model.PerfilUsuario;
@@ -26,13 +27,13 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class PerfilUsuarioControlador {
-
+	
 	@Autowired
-	private PerfilUsuarioDAO perfilUsuarioDAO;
+	private PerfilUsuarioBusiness perfilUsuarioBusiness;
 	
 	@RequestMapping(value="/perfil")
 	public ModelAndView listPerfilUsuario(ModelAndView model) throws IOException{
-		List<PerfilUsuario> listPerfilUsuario = perfilUsuarioDAO.listar();
+		List<PerfilUsuario> listPerfilUsuario = perfilUsuarioBusiness.listar();
 		model.addObject("listPerfilUsuario", listPerfilUsuario);
 		model.setViewName("PerfilView"); //NOMBRE DE LA VISTA PERFIL
 		
@@ -49,21 +50,37 @@ public class PerfilUsuarioControlador {
 	
 	@RequestMapping(value = "/guardarPerfil", method = RequestMethod.POST)
 	public ModelAndView guardarPerfil(@ModelAttribute PerfilUsuario perfilUsuario) {
-		perfilUsuarioDAO.guardarOActualizar(perfilUsuario);		
+
+		String mensaje = "";
+		if(perfilUsuario.equals("") || perfilUsuario.equals("")){
+			mensaje = "Debe ingresar todos los campos";
+		}else{
+			mensaje = perfilUsuarioBusiness.guardarOActualizar(perfilUsuario);
+		}
+		
+		if(!mensaje.equals("")){
+			ModelAndView model= new ModelAndView();
+			model.addObject("mensaje", mensaje);
+			model.addObject("perfilUsuario", perfilUsuario);
+			model.addObject("error", "error");
+			model.setViewName("PerfilForm"); 			
+			
+			return model;
+		}
 		return new ModelAndView("redirect:/perfil");
 	}
 	
 	@RequestMapping(value = "/borrarPerfil", method = RequestMethod.GET)
 	public ModelAndView borrarPerfilUsuario(HttpServletRequest request) {
 		int perfilId = Integer.parseInt(request.getParameter("id"));
-		perfilUsuarioDAO.borrar(perfilId);
+		perfilUsuarioBusiness.borrar(perfilId);
 		return new ModelAndView("redirect:/perfil");
 	}
 	
 	@RequestMapping(value = "/editarPerfil", method = RequestMethod.GET)
 	public ModelAndView editarPerfilUsuario(HttpServletRequest request) {
 		int perfilId = Integer.parseInt(request.getParameter("id"));
-		PerfilUsuario perfilUsuario = perfilUsuarioDAO.obtener(perfilId);
+		PerfilUsuario perfilUsuario = perfilUsuarioBusiness.obtener(perfilId);
 		ModelAndView model = new ModelAndView("PerfilForm");
 		model.addObject("perfilUsuario", perfilUsuario);
 		

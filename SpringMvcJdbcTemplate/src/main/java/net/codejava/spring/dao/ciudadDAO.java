@@ -11,13 +11,11 @@ import net.codejava.spring.model.ciudad;
  */
 public interface ciudadDAO {
 	
-	public void saveOrUpdate(ciudad ciudad);
+	public boolean saveOrUpdate(ciudad ciudad);
 	
-	public void delete(int idCiudad);
+	public boolean delete(int idCiudad);
 	
 	public ciudad get(int idCiudad);
-	
-	public boolean validar(String ciudad);
 	
 	public List<ciudad> list();
 	
