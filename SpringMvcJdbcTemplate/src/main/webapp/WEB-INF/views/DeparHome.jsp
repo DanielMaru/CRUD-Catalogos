@@ -53,9 +53,9 @@
 					<td>${depart.nombre_depart}</td>
 					<td>${depart.descrip_depart}</td>
 					<td>
-						<a href="editarDepart?id_depart=${depart.id_depart}">Editar</a>
+						<a href="editarDepart?id_depart=${depart.id_depart}"  class="btn btn-info">Editar</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="borrarDepart?id_depart=${depart.id_depart}">Borrar</a>
+						<a href="borrarDepart?id_depart=${depart.id_depart}" class="btn btn-danger">Borrar</a>
 					</td>
 							
 	        	</tr>
