@@ -8,8 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Modificar Usuario</title>
 </head>
 <body>
@@ -21,7 +21,8 @@
 			
 			<tr>
 				<td>id:</td>
-				<td><form:input path="id" /></td>
+				<input type="text" id="id" name="id" value="${usuario.getId() }" readonly/>
+				
 			</tr>
 			
 			<tr>
@@ -43,9 +44,7 @@
 			</tr>
 		
 		</form:form>
-	</div>
-	
-	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal fade" id="myModal" role="dialog">
 		    <div class="modal-dialog">
 		    
 		      <!-- Modal content-->
@@ -63,6 +62,9 @@
 		      </div>
 		      
 		    </div>
-	  	</div>
+
+	</div>
+	</div>
+	
 </body>
 </html>

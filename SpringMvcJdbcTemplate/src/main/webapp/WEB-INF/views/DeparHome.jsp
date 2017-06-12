@@ -34,8 +34,9 @@
     </head>
     <body>
     	<div align="center" class="row">
+    
 	        <h1>Lista Departamentos</h1>
-	        <h3><a href="nuevoDepart">Nuevo Departamento</a></h3>
+	        <h3><a href="nuevoDepart" class="btn btn-primary " >Nuevo Departamento</a></h3>
 	        <input type="text" id="inputDepart" onkeyup="myFunction()" placeholder="Buscar ...">
 	        <br></br>
 	        

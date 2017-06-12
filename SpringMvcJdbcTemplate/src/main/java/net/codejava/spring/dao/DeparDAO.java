@@ -18,4 +18,6 @@ public interface DeparDAO {
 	public Depar get(int id_depart);
 	
 	public List<Depar> list();
+	
+	public boolean validar(String nombre);
 }
