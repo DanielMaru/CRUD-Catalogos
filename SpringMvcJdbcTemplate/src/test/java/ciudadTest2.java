@@ -1,4 +1,3 @@
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -15,27 +14,25 @@ import net.codejava.spring.model.ciudad;
 @RunWith(MockitoJUnitRunner.class)
 public class ciudadTest2 {
 	
-	private CiudadBusiness2 ciudadBusiness;
+	private CiudadBusiness2 ciudadBusiness2;
 	
 	@Mock
 	private ciudadDAO ciudadDao;
 	
 	@Before
 	public void setUp(){
-		ciudadBusiness = new CiudadBusiness2(ciudadDao);
+		ciudadBusiness2 = new CiudadBusiness2(ciudadDao);
 	}
 	
 	@Test
 	public void noGuardarciudadSiElNombreYaExiste(){
 		//arrange
-		ciudad ciudadARetornar = new ciudad("NombreCiudad", "NombreDepartamento");
-		ciudad ciudad = new ciudad("NombreCiudad", "NombreDepartamento");
+		ciudad ciudad = new ciudad("medellin", "la ciudad");
 		
 		//act
-		when(ciudadDao.buscarPorNombreCiudad(ciudad.getNombreCiudad())).thenReturn(ciudadARetornar);
-		String resultado = ciudadBusiness.saveOrUpdate(ciudad);
-		
+		if(ciudadDao.validar(ciudad.getNombreCiudad())==true){
+		 ciudadBusiness2. saveOrUpdate(ciudad);
+		}
 		//assert
-		assertEquals("El nombre de la ciudad ya existe", resultado);
 	}
 }

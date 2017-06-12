@@ -21,13 +21,17 @@ public class CiudadBusiness2 {
 	public List<ciudad> listar() {
 		return ciudadDAO.list();
 	}
+	
+	public boolean validar(String NombreCiudad) {
+		return ciudadDAO.validar(NombreCiudad);
+	}
 
 	public String saveOrUpdate(ciudad ciudad) {
 		String mensaje = "";
 		if(ciudad.getIdCiudad() > 0){ //si es editar
 			ciudadDAO.saveOrUpdate(ciudad);
 		}else{ //si es guardar
-			if(ciudadDAO.buscarPorNombreCiudad(ciudad.getNombreCiudad()) == null){
+			if(ciudadDAO.validar(ciudad.getNombreCiudad()) == true){
 				ciudadDAO.saveOrUpdate(ciudad);
 			}else{
 				mensaje = "El nombre de la ciudad ya existe";
@@ -36,9 +40,7 @@ public class CiudadBusiness2 {
 		return mensaje;
 	}
 
-	public ciudad buscarPorNombreCiudad(String NombreCiudad) {
-		return ciudadDAO.buscarPorNombreCiudad(NombreCiudad);
-	}
+	
 
 	public void delete(int CiudadId) {
 		ciudadDAO.delete(CiudadId);

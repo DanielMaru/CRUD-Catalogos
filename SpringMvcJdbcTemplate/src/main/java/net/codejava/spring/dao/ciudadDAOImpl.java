@@ -78,36 +78,27 @@ public class ciudadDAOImpl implements ciudadDAO {
 		return listciudad;
 }
 			
-			@Override
-			public ciudad Obtener(int ciudadId) {
-				String sql = "SELECT * FROM ciudad WHERE IdCiudad='" + ciudadId +"' AND estado_ciudad='0'";
-				return jdbcTemplate.query(sql, new ResultSetExtractor<ciudad>() {
+	@Override
+	public boolean validar(String NombreCiudad) {
+		
+		String sql = "select count(idCiudad) cantidad FROM ciudad where NombreDepartamento=? and estado_ciudad='0'" ;
+		
 
-					@Override
-					public ciudad extractData(ResultSet rs) throws SQLException,
-							DataAccessException {
-						if (rs.next()) {
-							ciudad ciudad = new ciudad();
-							
-							ciudad.setIdCiudad(rs.getInt("idCiudad"));
-							ciudad.setNombreCiudad(rs.getString("Nombreciudad"));
-							ciudad.setNombreDepartamento(rs.getString("NombreDepartamento"));
-							ciudad.setestado_ciudad(rs.getInt("estado_ciudad"));
-							
-							return ciudad;
-						}
-						
-						return null;
-					}
-					
-				});
-			}
+		String name = (String)jdbcTemplate.queryForObject(sql, new Object[] { NombreCiudad }, String.class);
+		
+		if(name.equals("1")){
+			return false;
+		}
+		else{
+			return true;	
+		}
+	}
 		
 	
 
 	@Override
-	public ciudad buscarPorNombreCiudad (String buscarPorNombreCiudad) {
-		String sql = "SELECT * FROM ciudad WHERE IdCiudad='" + buscarPorNombreCiudad +"' AND estado_ciudad='0'";
+	public ciudad Obtener(int ciudadId) {
+		String sql = "SELECT * FROM ciudad WHERE IdCiudad=" + ciudadId;
 		return jdbcTemplate.query(sql, new ResultSetExtractor<ciudad>() {
 
 			@Override

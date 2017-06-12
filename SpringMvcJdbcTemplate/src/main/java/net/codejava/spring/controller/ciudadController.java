@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.codejava.spring.business.CiudadBusiness2;
 import net.codejava.spring.dao.ciudadDAO;
+import net.codejava.spring.model.Depar;
 import net.codejava.spring.model.PerfilUsuario;
 import net.codejava.spring.model.ciudad;
 
@@ -47,27 +48,30 @@ public class ciudadController {
 	}
 	
 	@RequestMapping(value = "/guardarciudad", method = RequestMethod.POST)
-	public ModelAndView guardarciudad(@ModelAttribute ciudad ciudad) {
-
-		String mensaje = "";
-		if(ciudad.equals("") || ciudad.equals("")){
-			mensaje = "Debe ingresar todos los campos";
-		}else{
-			mensaje = ciudadBusiness2.saveOrUpdate(ciudad);
-		}
-		
-		if(!mensaje.equals("")){
+	public ModelAndView saveOrUpdate(@ModelAttribute ciudad ciudad) {
+		if(!ciudadBusiness2.validar(ciudad.getNombreCiudad())){
 			ModelAndView model= new ModelAndView();
-			model.addObject("mensaje", mensaje);
+//			ciudad nuevaciudad = new ciudad();
 			model.addObject("ciudad", ciudad);
-			model.addObject("error", "error");
-			model.setViewName("ciudadForm"); 			
-			
+			model.addObject("error", "la ciudad ya existe.");
+			model.setViewName("ciudadForm");
 			return model;
 		}
-		return new ModelAndView("redirect:/ciudad");
+		else if(ciudad.getNombreCiudad().equals("") ||ciudad.getNombreDepartamento()==""){
+			ModelAndView model= new ModelAndView();
+			ciudad nuevociudad = new ciudad();
+			model.addObject("ciudad", nuevociudad);
+			model.addObject("error", "Los campos no pueden estar vacios");
+			model.setViewName("ciudadForm");
+            return model;
+		}
+		else{
+			ciudadBusiness2.saveOrUpdate(ciudad);		
+			return new ModelAndView("redirect:/ciudad");
+		}
+		
+		
 	}
-	
 	
 	@RequestMapping(value = "/Eliminarciudad", method = RequestMethod.GET)
 	public ModelAndView Eliminarciudad(HttpServletRequest request) {

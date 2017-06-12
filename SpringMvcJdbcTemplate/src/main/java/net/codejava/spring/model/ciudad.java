@@ -10,10 +10,16 @@ public class ciudad {
 
 	public ciudad() {
 	}
-
 	public ciudad(String nombreCiudad, String nombreDepartamento) {
 		this.NombreCiudad = nombreCiudad;
 		this.NombreDepartamento = nombreDepartamento;
+		
+	}
+
+	public ciudad(String nombreCiudad, String nombreDepartamento,int estado_ciudad) {
+		this.NombreCiudad = nombreCiudad;
+		this.NombreDepartamento = nombreDepartamento;
+		this.estado_ciudad = estado_ciudad;
 		
 		
 	}
